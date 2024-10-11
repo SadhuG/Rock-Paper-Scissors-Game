@@ -29,6 +29,32 @@ function Game() {
 		setRoundWonBy(whoWon);
 	};
 
+	const getPlayerBorderColor = () => {
+		switch (roundWonBy) {
+			case "player":
+				return "border-green-500";
+			case "computer":
+				return "border-red-400";
+			case "tie":
+				return "border-amber-500";
+			default:
+				return "border-zinc-400";
+		}
+	};
+
+	const getComputerBorderColor = () => {
+		switch (roundWonBy) {
+			case "computer":
+				return "border-green-500";
+			case "player":
+				return "border-red-400";
+			case "tie":
+				return "border-amber-500";
+			default:
+				return "border-zinc-400";
+		}
+	};
+
 	const playRound = (user, computer) => {
 		if (user == computer) {
 			setTies((ties) => ties + 1);
@@ -67,13 +93,7 @@ function Game() {
 			<div className="flex items-center max-[500px]:flex-col gap-8 max-[500px]:gap-4">
 				<div className="flex flex-col items-center">
 					<div
-						className={`w-40 h-40 border-8 border-zinc-400 ${
-							roundWonBy === "player" ? "border-green-500" : ""
-						} ${roundWonBy === "tie" ? "border-amber-500" : ""} ${
-							roundWonBy && roundWonBy !== "player" && roundWonBy !== "tie"
-								? "border-red-400"
-								: ""
-						} rounded-3xl`}
+						className={`w-40 h-40 border-8 ${getPlayerBorderColor()} rounded-3xl`}
 					>
 						{playerChoice && (
 							<img
@@ -88,13 +108,7 @@ function Game() {
 				<p className="text-neutral-50">v/s</p>
 				<div className="flex flex-col items-center">
 					<div
-						className={`w-40 h-40 border-8 border-zinc-400 ${
-							roundWonBy === "computer" ? "border-green-500" : ""
-						} ${roundWonBy === "tie" ? "border-amber-500" : ""} ${
-							roundWonBy && roundWonBy !== "computer" && roundWonBy !== "tie"
-								? "border-red-400"
-								: ""
-						} rounded-3xl`}
+						className={`w-40 h-40 border-8 ${getComputerBorderColor()} rounded-3xl`}
 					>
 						{computerChoice && (
 							<img
