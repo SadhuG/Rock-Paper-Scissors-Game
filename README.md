@@ -1,8 +1,10 @@
-# React + Vite
+# Rock Paper Scissors v1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is our beloved childhood game built using React.js, Vite, and Tailwind CSS. The project aims to provide a modern and visually appealing UI for your gaming experiences. Play against a computer where you don't know when you're gonna be outdone by it.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React.js:** A JavaScript library for building user interfaces.
+- **Vite:** A fast build tool and development server.
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+- **Modern UI:** Clean and modern design with Tailwind CSS.
