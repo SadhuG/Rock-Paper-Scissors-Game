@@ -18,30 +18,6 @@ const SlotMachine = ({ player, choice, wonBy, rounds }) => {
 
 	const duration = 1200;
 
-	const getBorderColor = () => {
-		if (player == "player") {
-			switch (wonBy) {
-				case "player":
-					return setBorderClr("border-green-500");
-				case "computer":
-					return setBorderClr("border-red-400");
-				case "tie":
-					return setBorderClr("border-amber-500");
-			}
-		}
-
-		if (player == "computer") {
-			switch (wonBy) {
-				case "computer":
-					return setBorderClr("border-green-500");
-				case "player":
-					return setBorderClr("border-red-400");
-				case "tie":
-					return setBorderClr("border-amber-500");
-			}
-		}
-	};
-
 	useEffect(() => {
 		if (choice != null) {
 			let interval;
@@ -67,6 +43,30 @@ const SlotMachine = ({ player, choice, wonBy, rounds }) => {
 	}, [rounds]);
 
 	useEffect(() => {
+		const getBorderColor = () => {
+			if (player == "player") {
+				switch (wonBy) {
+					case "player":
+						return setBorderClr("border-green-500");
+					case "computer":
+						return setBorderClr("border-red-400");
+					case "tie":
+						return setBorderClr("border-amber-500");
+				}
+			}
+
+			if (player == "computer") {
+				switch (wonBy) {
+					case "computer":
+						return setBorderClr("border-green-500");
+					case "player":
+						return setBorderClr("border-red-400");
+					case "tie":
+						return setBorderClr("border-amber-500");
+				}
+			}
+		};
+
 		const initialTimer = setTimeout(() => {
 			setInitialAnimation(false);
 		}, 1200);
@@ -81,7 +81,7 @@ const SlotMachine = ({ player, choice, wonBy, rounds }) => {
 			clearTimeout(initialTimer);
 			clearTimeout(finalTimer);
 		};
-	}, [initialAnimation, isAnimating, duration, targetTile]);
+	}, [player, wonBy, initialAnimation, isAnimating, duration, targetTile]);
 
 	return (
 		<div className="flex flex-col items-center">
