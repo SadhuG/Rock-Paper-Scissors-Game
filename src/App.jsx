@@ -1,6 +1,6 @@
 import Game from "./Game";
 
-function App() {
+const App = () => {
 	return <Game />;
-}
+};
 export default App;

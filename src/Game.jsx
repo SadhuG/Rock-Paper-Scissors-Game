@@ -1,11 +1,14 @@
 import { useState } from "react";
+import SlotMachine from "./slot";
+
 import Paper from "./assets/paper.png";
 import Rock from "./assets/rock.png";
 import Scissors from "./assets/scissors.png";
 
 const choices = { rock: Rock, paper: Paper, scissors: Scissors };
 
-function Game() {
+const Game = () => {
+	const [totalRounds, setTotalRounds] = useState(0);
 	const [playerWins, setPlayerWins] = useState(0);
 	const [computerWins, setComputerWins] = useState(0);
 	const [ties, setTies] = useState(0);
@@ -29,60 +32,41 @@ function Game() {
 		setRoundWonBy(whoWon);
 	};
 
-	const getPlayerBorderColor = () => {
-		switch (roundWonBy) {
-			case "player":
-				return "border-green-500";
-			case "computer":
-				return "border-red-400";
-			case "tie":
-				return "border-amber-500";
-			default:
-				return "border-zinc-400";
-		}
-	};
-
-	const getComputerBorderColor = () => {
-		switch (roundWonBy) {
-			case "computer":
-				return "border-green-500";
-			case "player":
-				return "border-red-400";
-			case "tie":
-				return "border-amber-500";
-			default:
-				return "border-zinc-400";
-		}
-	};
-
 	const playRound = (user, computer) => {
 		if (user == computer) {
 			setTies((ties) => ties + 1);
+			setTotalRounds((totalRounds) => totalRounds + 1);
 			return "tie";
 		} else if (user == "rock") {
 			if (computer == "paper") {
 				setComputerWins((computerWins) => computerWins + 1);
+				setTotalRounds((totalRounds) => totalRounds + 1);
 				return "computer";
 			} else if (computer == "scissors") {
 				setPlayerWins((playerWins) => playerWins + 1);
+				setTotalRounds((totalRounds) => totalRounds + 1);
 				return "player";
 			}
 		} else if (user == "paper") {
 			if (computer == "scissors") {
 				setComputerWins((computerWins) => computerWins + 1);
+				setTotalRounds((totalRounds) => totalRounds + 1);
 
 				return "computer";
 			} else if (computer == "rock") {
 				setPlayerWins((playerWins) => playerWins + 1);
+				setTotalRounds((totalRounds) => totalRounds + 1);
 				return "player";
 			}
 		} else if (user == "scissors") {
 			if (computer == "rock") {
 				setComputerWins((computerWins) => computerWins + 1);
+				setTotalRounds((totalRounds) => totalRounds + 1);
 
 				return "computer";
 			} else if (computer == "paper") {
 				setPlayerWins((playerWins) => playerWins + 1);
+				setTotalRounds((totalRounds) => totalRounds + 1);
 				return "player";
 			}
 		}
@@ -92,31 +76,24 @@ function Game() {
 		<section className="h-screen flex flex-col justify-center items-center gap-8 max-[500px]:gap-4">
 			<div className="flex items-center max-[500px]:flex-col gap-8 max-[500px]:gap-4">
 				<div className="flex flex-col items-center">
-					<div
-						className={`w-40 h-40 border-8 ${getPlayerBorderColor()} rounded-3xl`}
-					>
-						{playerChoice && (
-							<img
-								src={choices[playerChoice]}
-								alt={playerChoice}
-							/>
-						)}
-					</div>
+					<SlotMachine
+						player={"player"}
+						choice={playerChoice}
+						wonBy={roundWonBy}
+						rounds={totalRounds}
+					/>
 					<p>Player</p>
 				</div>
 
 				<p className="text-neutral-50">v/s</p>
+
 				<div className="flex flex-col items-center">
-					<div
-						className={`w-40 h-40 border-8 ${getComputerBorderColor()} rounded-3xl`}
-					>
-						{computerChoice && (
-							<img
-								src={choices[computerChoice]}
-								alt={computerChoice}
-							/>
-						)}
-					</div>
+					<SlotMachine
+						player={"computer"}
+						choice={computerChoice}
+						wonBy={roundWonBy}
+						rounds={totalRounds}
+					/>
 					<p>Computer</p>
 				</div>
 			</div>
@@ -127,7 +104,7 @@ function Game() {
 					onClick={() => {
 						handleClick("rock");
 					}}
-					className="w-20 h-20 border-8 border-orange-400 bg-orange-400/25 rounded-full p-2"
+					className="w-20 h-20 border-8 border-teal-400 bg-teal-400/25 rounded-full p-2"
 				>
 					<img
 						src={Rock}
@@ -139,7 +116,7 @@ function Game() {
 					onClick={() => {
 						handleClick("paper");
 					}}
-					className="w-20 h-20 border-8 border-teal-400 bg-teal-400/25 rounded-full p-2 "
+					className="w-20 h-20 border-8 border-sky-400 bg-sky-400/25 rounded-full p-2 "
 				>
 					<img
 						src={Paper}
@@ -151,7 +128,7 @@ function Game() {
 					onClick={() => {
 						handleClick("scissors");
 					}}
-					className="w-20 h-20 border-8 border-violet-400 bg-violet-400/25 rounded-full p-2 "
+					className="w-20 h-20 border-8 border-indigo-400 bg-indigo-400/25 rounded-full p-2 "
 				>
 					<img
 						src={Scissors}
@@ -162,7 +139,10 @@ function Game() {
 
 			<div className="flex flex-col items-center">
 				<p>
-					Is a Tie: <span className="text-neutral-50">{ties}</span>
+					Current Round: <span className="text-neutral-50">{totalRounds}</span>
+				</p>
+				<p>
+					Ties: <span className="text-neutral-50">{ties}</span>
 				</p>
 				<p>
 					Player Won: <span className="text-neutral-50">{playerWins}</span>
@@ -173,5 +153,5 @@ function Game() {
 			</div>
 		</section>
 	);
-}
+};
 export default Game;
