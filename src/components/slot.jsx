@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
-import Paper from "./assets/paper.png";
-import Rock from "./assets/rock.png";
-import Scissors from "./assets/scissors.png";
+import Paper from "../assets/paper.png";
+import Rock from "../assets/rock.png";
+import Scissors from "../assets/scissors.png";
 
 const SlotMachine = ({ player, choice, wonBy, rounds }) => {
 	const [currentTile, setCurrentTile] = useState(null);
