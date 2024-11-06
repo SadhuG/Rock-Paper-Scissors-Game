@@ -83,6 +83,7 @@ const SlotMachine = ({ player, choice, wonBy, rounds, updateResults }) => {
 			clearTimeout(initialTimer);
 			clearTimeout(finalTimer);
 		};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [player, wonBy, initialAnimation, isAnimating, duration, targetTile]);
 
 	return (
