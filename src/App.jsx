@@ -8,10 +8,16 @@ import Scissors from "./assets/scissors.png";
 const choices = { rock: Rock, paper: Paper, scissors: Scissors };
 
 const App = () => {
+	// Game rounds
 	const [totalRounds, setTotalRounds] = useState(0);
 	const [playerWins, setPlayerWins] = useState(0);
 	const [computerWins, setComputerWins] = useState(0);
 	const [ties, setTies] = useState(0);
+
+	// Results Displayed
+	const [playerWinsDisplay, setPlayerWinsDisplay] = useState(0);
+	const [computerWinsDisplay, setComputerWinsDisplay] = useState(0);
+	const [tiesDisplay, setTiesDisplay] = useState(0);
 
 	const [playerChoice, setPlayerChoice] = useState(null);
 	const [computerChoice, setComputerChoice] = useState(null);
@@ -37,39 +43,25 @@ const App = () => {
 			setTies((ties) => ties + 1);
 			setTotalRounds((totalRounds) => totalRounds + 1);
 			return "tie";
-		} else if (user == "rock") {
-			if (computer == "paper") {
-				setComputerWins((computerWins) => computerWins + 1);
-				setTotalRounds((totalRounds) => totalRounds + 1);
-				return "computer";
-			} else if (computer == "scissors") {
-				setPlayerWins((playerWins) => playerWins + 1);
-				setTotalRounds((totalRounds) => totalRounds + 1);
-				return "player";
-			}
-		} else if (user == "paper") {
-			if (computer == "scissors") {
-				setComputerWins((computerWins) => computerWins + 1);
-				setTotalRounds((totalRounds) => totalRounds + 1);
-
-				return "computer";
-			} else if (computer == "rock") {
-				setPlayerWins((playerWins) => playerWins + 1);
-				setTotalRounds((totalRounds) => totalRounds + 1);
-				return "player";
-			}
-		} else if (user == "scissors") {
-			if (computer == "rock") {
-				setComputerWins((computerWins) => computerWins + 1);
-				setTotalRounds((totalRounds) => totalRounds + 1);
-
-				return "computer";
-			} else if (computer == "paper") {
-				setPlayerWins((playerWins) => playerWins + 1);
-				setTotalRounds((totalRounds) => totalRounds + 1);
-				return "player";
-			}
+		} else if (
+			(playerChoice === "rock" && computerChoice === "scissors") ||
+			(playerChoice === "paper" && computerChoice === "rock") ||
+			(playerChoice === "scissors" && computerChoice === "paper")
+		) {
+			setPlayerWins((playerWins) => playerWins + 1);
+			setTotalRounds((totalRounds) => totalRounds + 1);
+			return "player";
+		} else {
+			setComputerWins((computerWins) => computerWins + 1);
+			setTotalRounds((totalRounds) => totalRounds + 1);
+			return "computer";
 		}
+	};
+
+	const updateResults = () => {
+		setPlayerWinsDisplay(playerWins);
+		setComputerWinsDisplay(computerWins);
+		setTiesDisplay(ties);
 	};
 
 	return (
@@ -81,6 +73,7 @@ const App = () => {
 						choice={playerChoice}
 						wonBy={roundWonBy}
 						rounds={totalRounds}
+						updateResults={updateResults}
 					/>
 					<p>Player</p>
 				</div>
@@ -93,6 +86,7 @@ const App = () => {
 						choice={computerChoice}
 						wonBy={roundWonBy}
 						rounds={totalRounds}
+						updateResults={updateResults}
 					/>
 					<p>Computer</p>
 				</div>
@@ -142,13 +136,15 @@ const App = () => {
 					Current Round: <span className="text-neutral-50">{totalRounds}</span>
 				</p>
 				<p>
-					Ties: <span className="text-neutral-50">{ties}</span>
+					Ties: <span className="text-neutral-50">{tiesDisplay}</span>
 				</p>
 				<p>
-					Player Won: <span className="text-neutral-50">{playerWins}</span>
+					Player Won:{" "}
+					<span className="text-neutral-50">{playerWinsDisplay}</span>
 				</p>
 				<p>
-					Computer Won: <span className="text-neutral-50">{computerWins}</span>
+					Computer Won:{" "}
+					<span className="text-neutral-50">{computerWinsDisplay}</span>
 				</p>
 			</div>
 		</section>

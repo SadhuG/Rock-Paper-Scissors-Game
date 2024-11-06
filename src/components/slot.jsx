@@ -5,7 +5,7 @@ import Paper from "../assets/paper.png";
 import Rock from "../assets/rock.png";
 import Scissors from "../assets/scissors.png";
 
-const SlotMachine = ({ player, choice, wonBy, rounds }) => {
+const SlotMachine = ({ player, choice, wonBy, rounds, updateResults }) => {
 	const [currentTile, setCurrentTile] = useState(null);
 	const [isAnimating, setIsAnimating] = useState(true);
 	const [initialAnimation, setInitialAnimation] = useState(true);
@@ -75,6 +75,8 @@ const SlotMachine = ({ player, choice, wonBy, rounds }) => {
 			setIsAnimating(false);
 			setCurrentTile(targetTile);
 			getBorderColor();
+
+			updateResults();
 		}, duration);
 
 		return () => {
@@ -102,4 +104,5 @@ SlotMachine.propTypes = {
 	choice: PropTypes.string,
 	wonBy: PropTypes.string,
 	rounds: PropTypes.number,
+	updateResults: PropTypes.func,
 };
