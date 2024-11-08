@@ -39,7 +39,7 @@ const App = () => {
 	};
 
 	const playRound = (user, computer) => {
-		if (user == computer) {
+		if (user === computer) {
 			setTies((ties) => ties + 1);
 			setTotalRounds((totalRounds) => totalRounds + 1);
 			return "tie";
