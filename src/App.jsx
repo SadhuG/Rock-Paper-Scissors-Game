@@ -1,4 +1,34 @@
+import { useState } from "react";
+
 const App = () => {
+	const [gameType, setGameType] = useState(null);
+	const [roundsInput, setRoundsInput] = useState(3);
+
+	function handleFormSubmit(e, gameFlow) {
+		e.preventDefault();
+
+		if (gameFlow === "pnp") {
+			setGameType(gameFlow);
+			startGame();
+			console.log("pnp");
+			return;
+		}
+
+		if (roundsInput <= 0 || roundsInput % 1 != 0 || roundsInput === "") {
+			setRoundsInput("");
+			alert(
+				"Please enter the number of rounds a whole number greater than 0 to play"
+			);
+			return;
+		}
+
+		setGameType(gameFlow);
+		startGame();
+		console.log("rounds:" + roundsInput);
+	}
+
+	function startGame() {}
+
 	return (
 		<>
 			{/* Game start round selection form */}
@@ -12,14 +42,30 @@ const App = () => {
 						<input
 							type="number"
 							placeholder="Number of rounds"
+							value={roundsInput}
+							onChange={(e) => setRoundsInput(e.target.value)}
+							// triggers form submission when "Enter" key is pressed in the input field
+							onKeyDown={(e) => {
+								if (e.key === "Enter") handleFormSubmit(e, "rounds");
+							}}
 						/>
 					</label>
 
 					{/* Button for fixed rounds */}
-					<button type="button">StartGame</button>
+					<button
+						type="button"
+						onClick={(e) => handleFormSubmit(e, "rounds")}
+					>
+						StartGame
+					</button>
 
 					{/* btn for pass and play */}
-					<button type="button">Pass & Play</button>
+					<button
+						type="button"
+						onClick={(e) => handleFormSubmit(e, "pnp")}
+					>
+						Pass & Play
+					</button>
 				</form>
 			</div>
 
