@@ -14,10 +14,15 @@ const App = () => {
 			return;
 		}
 
-		if (roundsInput <= 0 || roundsInput % 1 != 0 || roundsInput === "") {
+		if (
+			roundsInput <= 0 ||
+			roundsInput % 1 != 0 ||
+			roundsInput === "" ||
+			roundsInput >= 100
+		) {
 			setRoundsInput("");
 			alert(
-				"Please enter the number of rounds a whole number greater than 0 to play"
+				"Please enter the number of rounds a whole number greater than 0 less than 100 (i.e., 1 to 99) to play"
 			);
 			return;
 		}
@@ -25,6 +30,15 @@ const App = () => {
 		setGameType(gameFlow);
 		startGame();
 		console.log("rounds:" + roundsInput);
+	}
+
+	// Triggers form submission when "Enter" key is pressed in the input field
+	// Prevents the "." "-" "+" from getting registered into the input field
+	function handleKeyDown(e) {
+		if (e.key === "." || e.key === "e" || e.key === "+" || e.key === "-") {
+			e.preventDefault();
+		}
+		if (e.key === "Enter") handleFormSubmit(e, "rounds");
 	}
 
 	function startGame() {}
@@ -44,10 +58,7 @@ const App = () => {
 							placeholder="Number of rounds"
 							value={roundsInput}
 							onChange={(e) => setRoundsInput(e.target.value)}
-							// triggers form submission when "Enter" key is pressed in the input field
-							onKeyDown={(e) => {
-								if (e.key === "Enter") handleFormSubmit(e, "rounds");
-							}}
+							onKeyDown={handleKeyDown}
 						/>
 					</label>
 
