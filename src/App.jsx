@@ -1,93 +1,63 @@
 import { useState } from "react";
+import RoundInputForm from "./components/RoundInputForm";
 
+const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
 const App = () => {
-	const [gameType, setGameType] = useState(null);
-	const [roundsInput, setRoundsInput] = useState(3);
+	// Game States
+	const [totalRounds, setTotalRounds] = useState(100);
+	const [gameType, setGameType] = useState("pnp");
 
-	function handleFormSubmit(e, gameFlow) {
-		e.preventDefault();
+	// Round States
+	const [currentRound, setCurrentRound] = useState(0);
+	const [userWins, setUserWins] = useState(0);
+	const [computerWins, setComputerWins] = useState(0);
+	const [ties, setTies] = useState(0);
 
-		if (gameFlow === "pnp") {
-			setGameType(gameFlow);
-			startGame();
-			console.log("pnp");
+	// Round Choice Inputs
+	const [userChoice, setUserChoice] = useState(null);
+	const [computerChoice, setComputerChoice] = useState(null);
+
+	// Round Results
+	const [roundWonBy, setRoundWonBy] = useState(null);
+
+	// Callback from RoundInputForm to set Game Type and Total Rounds
+	function setGame(gameTypeInput, roundsInput) {
+		// Rounds game type handled
+		if (gameTypeInput === "rounds") {
+			setGameType(gameTypeInput);
+			setTotalRounds(roundsInput);
 			return;
 		}
 
-		if (
-			roundsInput <= 0 ||
-			roundsInput % 1 != 0 ||
-			roundsInput === "" ||
-			roundsInput >= 100
-		) {
-			setRoundsInput("");
-			alert(
-				"Please enter the number of rounds a whole number greater than 0 less than 100 (i.e., 1 to 99) to play"
-			);
-			return;
-		}
-
-		setGameType(gameFlow);
-		startGame();
-		console.log("rounds:" + roundsInput);
+		// Pass n Play handled where default state of total rounds is used in game instead of round input
+		setGameType(gameTypeInput);
+		return;
 	}
 
-	// Triggers form submission when "Enter" key is pressed in the input field
-	// Prevents the "." "-" "+" from getting registered into the input field
-	function handleKeyDown(e) {
-		if (e.key === "." || e.key === "e" || e.key === "+" || e.key === "-") {
-			e.preventDefault();
-		}
-		if (e.key === "Enter") handleFormSubmit(e, "rounds");
+	function handleUserInput(input) {
+		setUserChoice(input);
+		console.log(input);
 	}
 
-	function startGame() {}
+	function generateComputerInput() {
+		const choicesArray = Object.keys(choices);
+		const randomIndex = Math.floor(Math.random() * choicesArray.length);
+		return choicesArray[randomIndex];
+	}
 
 	return (
 		<>
 			{/* Game start round selection form */}
-			<div>
-				<p>Hello There</p>
-				<p>Enter the number of rounds you want to play or just Pass & Play</p>
-
-				<form>
-					<label>
-						<span>Enter the number of rounds</span>
-						<input
-							type="number"
-							placeholder="Number of rounds"
-							value={roundsInput}
-							onChange={(e) => setRoundsInput(e.target.value)}
-							onKeyDown={handleKeyDown}
-						/>
-					</label>
-
-					{/* Button for fixed rounds */}
-					<button
-						type="button"
-						onClick={(e) => handleFormSubmit(e, "rounds")}
-					>
-						StartGame
-					</button>
-
-					{/* btn for pass and play */}
-					<button
-						type="button"
-						onClick={(e) => handleFormSubmit(e, "pnp")}
-					>
-						Pass & Play
-					</button>
-				</form>
-			</div>
+			<RoundInputForm setGame={setGame} />
 
 			{/* Choices display */}
 			<p>Player Choice:</p>
 			<p>Computer Choice:</p>
 
 			{/* Player Buttons */}
-			<button>Rock</button>
-			<button>Paper</button>
-			<button>Scissors</button>
+			<button onClick={() => handleUserInput("rock")}>Rock</button>
+			<button onClick={() => handleUserInput("paper")}>Paper</button>
+			<button onClick={() => handleUserInput("scissors")}>Scissors</button>
 
 			{/* Round Display */}
 			<div className="flex flex-col items-center">
