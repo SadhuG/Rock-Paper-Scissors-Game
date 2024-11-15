@@ -3,6 +3,9 @@ import RoundInputForm from "./components/RoundInputForm";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
 const App = () => {
+	// Controls the display of round input form modal
+	const [displayRoundInputForm, setRoundInputFormDisplay] = useState(true);
+
 	// Game States
 	const [totalRounds, setTotalRounds] = useState(100);
 	const [gameType, setGameType] = useState("pnp");
@@ -48,7 +51,10 @@ const App = () => {
 	return (
 		<>
 			{/* Game start round selection form */}
-			<RoundInputForm setGame={setGame} />
+			<RoundInputForm
+				setGame={setGame}
+				formDisplay={displayRoundInputForm}
+			/>
 
 			{/* Choices display */}
 			<p>Player Choice:</p>

@@ -1,9 +1,24 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const RoundInputForm = ({ setGame }) => {
+const RoundInputForm = ({ setGame, formDisplay }) => {
 	// Form input states
 	const [roundsInput, setRoundsInput] = useState(3);
+
+	// Handles the Dialog display for input form
+	// References to the dialog in the DOM
+	const inputForm = useRef(null);
+	// Shows the dialog modal
+	useEffect(() => {
+		if (formDisplay === true) {
+			inputForm.current.showModal();
+		}
+		return;
+	}, [formDisplay]);
+	// Closes the dialog modal
+	function closeModal() {
+		inputForm.current.close();
+	}
 
 	// Triggers form submission when "Enter" key is pressed in the input field
 	// Prevents the "." "-" "+" from getting registered into the input field
@@ -26,7 +41,7 @@ const RoundInputForm = ({ setGame }) => {
 		// Pass and Play handled
 		if (gameType === "pnp") {
 			setGame(gameType, roundsInput);
-			return;
+			return closeModal();
 		}
 
 		// Round input edge cases handled
@@ -40,10 +55,11 @@ const RoundInputForm = ({ setGame }) => {
 
 		// Normal flow of form submission
 		setGame(gameType, roundsInput);
+		return closeModal();
 	}
 
 	return (
-		<div>
+		<dialog ref={inputForm}>
 			<p>Hello There</p>
 			<p>Enter the number of rounds you want to play or just Pass & Play</p>
 
@@ -75,11 +91,12 @@ const RoundInputForm = ({ setGame }) => {
 					Pass & Play
 				</button>
 			</form>
-		</div>
+		</dialog>
 	);
 };
 RoundInputForm.propTypes = {
 	setGame: PropTypes.func.isRequired,
+	formDisplay: PropTypes.bool.isRequired,
 };
 
 export default RoundInputForm;
