@@ -25,6 +25,9 @@ const App = () => {
 
 	// Callback from RoundInputForm to set Game Type and Total Rounds
 	function setGame(gameTypeInput, roundsInput) {
+		// This sets the form state to false so that the next time form can be shown only by changing this state to true
+		setRoundInputFormDisplay(false);
+
 		// Rounds game type handled
 		if (gameTypeInput === "rounds") {
 			setGameType(gameTypeInput);
