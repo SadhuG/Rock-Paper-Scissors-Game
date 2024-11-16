@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
 const RoundInputForm = ({ setGame, formDisplay }) => {
-	// Form input states
+	// Form round input states
 	const [roundsInput, setRoundsInput] = useState(3);
 
 	// Handles the Dialog display for input form
@@ -15,6 +15,7 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 		}
 		return;
 	}, [formDisplay]);
+	
 	// Closes the dialog modal
 	function closeModal() {
 		inputForm.current.close();

@@ -5,6 +5,11 @@ const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
 const App = () => {
 	// Controls the display of round input form modal
 	const [displayRoundInputForm, setRoundInputFormDisplay] = useState(true);
+	// Sets if the game has started
+	const [isGameStarted, setGameStarted] = useState(false);
+
+	// Enables and disables user input buttons
+	const [inputDisabled, setInputDisabled] = useState(true);
 
 	// Game States
 	const [totalRounds, setTotalRounds] = useState(100);
@@ -25,8 +30,11 @@ const App = () => {
 
 	// Callback from RoundInputForm to set Game Type and Total Rounds
 	function setGame(gameTypeInput, roundsInput) {
-		// This sets the form state to false so that the next time form can be shown only by changing this state to true
+		// This sets the form state to "false" so that the next time form can be shown only by changing this state to "true"
 		setRoundInputFormDisplay(false);
+
+		// Starts the game i.e, enabling inputs and updating rounds
+		startGame();
 
 		// Rounds game type handled
 		if (gameTypeInput === "rounds") {
@@ -38,6 +46,11 @@ const App = () => {
 		// Pass n Play handled where default state of total rounds is used in game instead of round input
 		setGameType(gameTypeInput);
 		return;
+	}
+
+	function startGame() {
+		setInputDisabled(false);
+		setGameStarted(true);
 	}
 
 	function handleUserInput(input) {
@@ -63,18 +76,37 @@ const App = () => {
 			<p>Player Choice:</p>
 			<p>Computer Choice:</p>
 
-			{/* Player Buttons */}
-			<button onClick={() => handleUserInput("rock")}>Rock</button>
-			<button onClick={() => handleUserInput("paper")}>Paper</button>
-			<button onClick={() => handleUserInput("scissors")}>Scissors</button>
+			{/* Player Input/Choice Buttons */}
+			<button
+				disabled={inputDisabled}
+				onClick={() => handleUserInput("rock")}
+			>
+				Rock
+			</button>
+
+			<button
+				disabled={inputDisabled}
+				onClick={() => handleUserInput("paper")}
+			>
+				Paper
+			</button>
+
+			<button
+				disabled={inputDisabled}
+				onClick={() => handleUserInput("scissors")}
+			>
+				Scissors
+			</button>
 
 			{/* Round Display */}
 			<div className="flex flex-col items-center">
-				<p>Total Rounds :</p>
-				<p>Current Round :</p>
-				<p>Ties :</p>
-				<p>Player Won :</p>
-				<p>Computer Won :</p>
+				{gameType === "rounds" && (
+					<p>Total Rounds:{isGameStarted && totalRounds}</p>
+				)}
+				<p>Current Round:{isGameStarted ? 1 : 0}</p>
+				<p>Ties:{ties}</p>
+				<p>Player Won:{userWins}</p>
+				<p>Computer Won:{computerWins}</p>
 			</div>
 		</>
 	);
