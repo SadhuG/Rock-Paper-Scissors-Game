@@ -162,7 +162,7 @@ const App = () => {
 	}
 
 	// Hides the result dialog, resets the states and starts the new game
-	function handleGameExit() {
+	function handleResultExit() {
 		setGameResult(false);
 		resetGameStates();
 	}
@@ -183,6 +183,8 @@ const App = () => {
 		// Displays the round input form and restarts the game
 		setRoundInputFormDisplay(true);
 	}
+
+
 	return (
 		<>
 			{/* Game start round selection form */}
@@ -213,15 +215,13 @@ const App = () => {
 				computerWins={computerWins}
 			/>
 
-			{/* Rules and Exit Game buttons */}
-			<button>Rules</button>
-			<button>ExitGame</button>
+
 
 			{/* End Game Display */}
 			<EndGameResult
 				displayGameResult={displayGameResult}
 				resultMessage={resultMessage}
-				handleGameExit={handleGameExit}
+				handleResultExit={handleResultExit}
 			/>
 		</>
 	);

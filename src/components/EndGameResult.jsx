@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 const EndGameResult = ({
 	displayGameResult,
 	resultMessage,
-	handleGameExit,
+	handleResultExit,
 }) => {
 	// Ref to the dialog
 	const gameResult = useRef(null);
@@ -16,10 +16,10 @@ const EndGameResult = ({
 		return;
 	}, [displayGameResult]);
 
-	// Closes the result modal after button click and callbacks to the "handleGameExit" function in "App.jsx"
+	// Closes the result modal after button click and callbacks to the "handleResultExit" function in "App.jsx"
 	function handleClick() {
 		gameResult.current.close();
-		handleGameExit();
+		handleResultExit();
 	}
 
 	return (
@@ -37,6 +37,6 @@ const EndGameResult = ({
 EndGameResult.propTypes = {
 	displayGameResult: PropTypes.bool.isRequired,
 	resultMessage: PropTypes.object,
-	handleGameExit: PropTypes.func,
+	handleResultExit: PropTypes.func,
 };
 export default EndGameResult;
