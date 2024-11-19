@@ -123,7 +123,6 @@ const App = () => {
 
 			// If it's the last round it handles the
 			if (currentRound == totalRounds) {
-				setGameStarted(false);
 				setInputDisabled(true);
 				setGameResult(true);
 			}
@@ -179,6 +178,7 @@ const App = () => {
 
 	function resetGameStates() {
 		// Resets all the game states to their initial values
+		setGameStarted(false);
 		setTotalRounds(100);
 		setGameType("pnp");
 		setCurrentRound(0);
