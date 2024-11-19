@@ -15,7 +15,7 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 		}
 		return;
 	}, [formDisplay]);
-	
+
 	// Closes the dialog modal
 	function closeModal() {
 		inputForm.current.close();
@@ -69,7 +69,7 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 					<span>Enter the number of rounds</span>
 					<input
 						type="number"
-						placeholder="Number of rounds"
+						placeholder="eg. 3"
 						value={roundsInput}
 						onChange={handleInputChange}
 						onKeyDown={handleInputKeyDown}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EndGameResult from "./components/EndGameResult";
 import RoundInputForm from "./components/RoundInputForm";
+import UserInputButtons from "./components/UserInputButtons";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
 const App = () => {
@@ -195,26 +196,10 @@ const App = () => {
 			<p>Computer Choice:{computerChoice}</p>
 
 			{/* Player Input/Choice Buttons */}
-			<button
-				disabled={inputDisabled}
-				onClick={() => handleUserInput("rock")}
-			>
-				Rock
-			</button>
-
-			<button
-				disabled={inputDisabled}
-				onClick={() => handleUserInput("paper")}
-			>
-				Paper
-			</button>
-
-			<button
-				disabled={inputDisabled}
-				onClick={() => handleUserInput("scissors")}
-			>
-				Scissors
-			</button>
+			<UserInputButtons
+				inputDisabled={inputDisabled}
+				handleUserInput={handleUserInput}
+			/>
 
 			{/* Round Display */}
 			<div className="flex flex-col items-center">
