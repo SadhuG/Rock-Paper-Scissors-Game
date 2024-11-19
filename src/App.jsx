@@ -21,12 +21,43 @@ const App = () => {
 	const [computerWins, setComputerWins] = useState(0);
 	const [ties, setTies] = useState(0);
 
-	// Round Choice Inputs
+	// Round Choice states
+	// Choices are drilled down as parameters to functions, the "user" and "computer" "choice" states are used to update displays
 	const [userChoice, setUserChoice] = useState(null);
 	const [computerChoice, setComputerChoice] = useState(null);
 
-	// Round Results
+	// Round Results and display updated each round
 	const [roundWonBy, setRoundWonBy] = useState(null);
+	const [roundResultDisplay, showRoundResultDisplay] = useState(false);
+
+	// State to trigger game result display
+	const [displayGameResult, setGameResult] = useState(false);
+
+	// Final Result Messages and a state to display them
+	const finalMessages = {
+		playerWon: {
+			title: "Yay you won",
+			message: "Wanna continue this winning streak",
+			buttonText: "Play again",
+		},
+		computerWon: {
+			title: "You Lost",
+			message: "Don't loose hope we're rooting for you",
+			buttonText: "start again",
+		},
+		tie: {
+			title: "It's a Tie",
+			message: "We wish you all the best",
+			buttonText: "try again",
+		},
+	};
+
+	const [showFinalMessage, setFinalMessage] = useState();
+
+	// Increment current round by one
+	function currentRoundIncrement() {
+		setCurrentRound((currentRound) => currentRound + 1);
+	}
 
 	// Callback from RoundInputForm to set Game Type and Total Rounds
 	function setGame(gameTypeInput, roundsInput) {
@@ -49,19 +80,71 @@ const App = () => {
 	}
 
 	function startGame() {
+		currentRoundIncrement();
 		setInputDisabled(false);
 		setGameStarted(true);
 	}
 
-	function handleUserInput(input) {
-		setUserChoice(input);
-		console.log(input);
+	function handleUserInput(playerChoice) {
+		setUserChoice(playerChoice);
+		playRound(playerChoice);
 	}
 
 	function generateComputerInput() {
 		const choicesArray = Object.keys(choices);
 		const randomIndex = Math.floor(Math.random() * choicesArray.length);
 		return choicesArray[randomIndex];
+	}
+
+	function playRound(playerChoice) {
+		if (isGameStarted && currentRound <= totalRounds) {
+			setInputDisabled(true);
+			const getComputerChoice = generateComputerInput();
+			setComputerChoice(getComputerChoice);
+			const roundWinner = whoWon(playerChoice, getComputerChoice);
+			setRoundWonBy(roundWinner);
+			showRoundResultDisplay(true);
+			console.log(`user choice ${playerChoice}, computer choice ${getComputerChoice}
+			winner: ${roundWinner}`);
+			setInputDisabled(false);
+			if (currentRound < totalRounds) {
+				currentRoundIncrement();
+			}
+			if (currentRound == totalRounds) {
+				setGameStarted(false);
+				setInputDisabled(true);
+				setGameResult(true);
+				endGame();
+			}
+		}
+	}
+
+	function whoWon(playerInput, computerInput) {
+		if (playerInput === computerInput) {
+			setTies((ties) => ties + 1);
+			return "It's a tie";
+		} else if (
+			(playerInput === "rock" && computerInput === "scissors") ||
+			(playerInput === "paper" && computerInput === "rock") ||
+			(playerInput === "scissors" && computerInput === "paper")
+		) {
+			setUserWins((playerWins) => playerWins + 1);
+			return "player won";
+		} else {
+			setComputerWins((computerWins) => computerWins + 1);
+			return "computer won";
+		}
+	}
+
+	function endGame() {
+		setGameResult(true);
+		if (userWins === computerWins) {
+			setFinalMessage(finalMessages["tie"]);
+		} else if (userWins > computerWins) {
+			setFinalMessage(finalMessages["playerWon"]);
+		} else {
+			setFinalMessage(finalMessages["computerWon"]);
+		}
 	}
 
 	return (
@@ -73,8 +156,9 @@ const App = () => {
 			/>
 
 			{/* Choices display */}
-			<p>Player Choice:</p>
-			<p>Computer Choice:</p>
+			<p>Player Choice:{userChoice}</p>
+			<p>{roundResultDisplay ? roundWonBy : "v/s"}</p>
+			<p>Computer Choice:{computerChoice}</p>
 
 			{/* Player Input/Choice Buttons */}
 			<button
@@ -103,11 +187,14 @@ const App = () => {
 				{gameType === "rounds" && (
 					<p>Total Rounds:{isGameStarted && totalRounds}</p>
 				)}
-				<p>Current Round:{isGameStarted ? 1 : 0}</p>
+				<p>Current Round:{currentRound}</p>
 				<p>Ties:{ties}</p>
 				<p>Player Won:{userWins}</p>
 				<p>Computer Won:{computerWins}</p>
 			</div>
+
+			{/* End Game Display */}
+			
 		</>
 	);
 };
