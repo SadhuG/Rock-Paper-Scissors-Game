@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EndGameResult from "./components/EndGameResult";
 import RoundInputForm from "./components/RoundInputForm";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
@@ -52,7 +53,7 @@ const App = () => {
 		},
 	};
 
-	const [showFinalMessage, setFinalMessage] = useState();
+	const [resultMessage, setResultMessage] = useState();
 
 	// Increment current round by one
 	function currentRoundIncrement() {
@@ -79,24 +80,29 @@ const App = () => {
 		return;
 	}
 
+	// Starts the game and enables inputs
 	function startGame() {
 		currentRoundIncrement();
 		setInputDisabled(false);
 		setGameStarted(true);
 	}
 
+	// Accepts user inputs and plays the game
 	function handleUserInput(playerChoice) {
 		setUserChoice(playerChoice);
 		playRound(playerChoice);
 	}
 
+	// Makes an array from the keys of choices object declared at the start of the document and then selects and returns an item from the array as the computer choice using Math.random function
 	function generateComputerInput() {
 		const choicesArray = Object.keys(choices);
 		const randomIndex = Math.floor(Math.random() * choicesArray.length);
 		return choicesArray[randomIndex];
 	}
 
+	// Runs and manages every single round
 	function playRound(playerChoice) {
+		// Runs every round
 		if (isGameStarted && currentRound <= totalRounds) {
 			setInputDisabled(true);
 			const getComputerChoice = generateComputerInput();
@@ -107,18 +113,23 @@ const App = () => {
 			console.log(`user choice ${playerChoice}, computer choice ${getComputerChoice}
 			winner: ${roundWinner}`);
 			setInputDisabled(false);
+
+			// If it is not the last round it increments the current round by 1
 			if (currentRound < totalRounds) {
 				currentRoundIncrement();
 			}
+
+			// If it's the last round it handles the
 			if (currentRound == totalRounds) {
 				setGameStarted(false);
 				setInputDisabled(true);
 				setGameResult(true);
-				endGame();
+				getGameWinner();
 			}
 		}
 	}
 
+	// Takes the inputs decides the round winner return's the round winner and updates the score
 	function whoWon(playerInput, computerInput) {
 		if (playerInput === computerInput) {
 			setTies((ties) => ties + 1);
@@ -136,17 +147,40 @@ const App = () => {
 		}
 	}
 
-	function endGame() {
+	// Compares the scores to get the winner
+	function getGameWinner() {
 		setGameResult(true);
 		if (userWins === computerWins) {
-			setFinalMessage(finalMessages["tie"]);
+			setResultMessage(finalMessages["tie"]);
 		} else if (userWins > computerWins) {
-			setFinalMessage(finalMessages["playerWon"]);
+			setResultMessage(finalMessages["playerWon"]);
 		} else {
-			setFinalMessage(finalMessages["computerWon"]);
+			setResultMessage(finalMessages["computerWon"]);
 		}
 	}
 
+	// Hides the result dialog, resets the states and starts the new game
+	function handleGameExit() {
+		setGameResult(false);
+		resetGameStates();
+	}
+
+	function resetGameStates() {
+		// Resets all the game states to their initial values
+		setTotalRounds(100);
+		setGameType("pnp");
+		setCurrentRound(0);
+		setUserWins(0);
+		setComputerWins(0);
+		setTies(0);
+		setUserChoice(null);
+		setComputerChoice(null);
+		setRoundWonBy(null);
+		showRoundResultDisplay(null);
+
+		// Displays the round input form and restarts the game
+		setRoundInputFormDisplay(true);
+	}
 	return (
 		<>
 			{/* Game start round selection form */}
@@ -194,7 +228,11 @@ const App = () => {
 			</div>
 
 			{/* End Game Display */}
-			
+			<EndGameResult
+				displayGameResult={displayGameResult}
+				resultMessage={resultMessage}
+				handleGameExit={handleGameExit}
+			/>
 		</>
 	);
 };
