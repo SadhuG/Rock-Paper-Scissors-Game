@@ -10,9 +10,14 @@ const RoundsAndScoresDisplay = ({
 }) => {
 	return (
 		<div className="flex flex-col items-center">
-			{gameType === "rounds" && (
-				<p>Total Rounds:{isGameStarted && totalRounds}</p>
-			)}
+			<p>
+				{isGameStarted &&
+					`Game Type: ${gameType === "rounds" ? "Rounds" : "Pass n Play"}`}
+			</p>
+			<p>
+				{gameType === "rounds" &&
+					`Total Rounds:${isGameStarted && totalRounds}`}
+			</p>
 			<p>Current Round:{currentRound}</p>
 			<p>Ties:{ties}</p>
 			<p>Player Won:{userWins}</p>

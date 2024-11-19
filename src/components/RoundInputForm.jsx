@@ -89,7 +89,7 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 					type="button"
 					onClick={(e) => handleFormSubmit(e, "pnp")}
 				>
-					Pass & Play
+					Pass n Play
 				</button>
 			</form>
 		</dialog>
