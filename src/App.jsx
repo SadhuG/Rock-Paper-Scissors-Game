@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EndGameResult from "./components/EndGameResult";
 import RoundInputForm from "./components/RoundInputForm";
 import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
@@ -126,10 +126,20 @@ const App = () => {
 				setGameStarted(false);
 				setInputDisabled(true);
 				setGameResult(true);
-				getGameWinner();
 			}
 		}
 	}
+
+	//To ensure that the score states are updated before the game result is displayed
+	useEffect(() => {
+		if (displayGameResult) {
+			getGameWinner();
+		}
+
+		return;
+		// Exhaustive dependencies are disabled to circumvent linter warnings
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [displayGameResult]);
 
 	// Takes the inputs decides the round winner return's the round winner and updates the score
 	function whoWon(playerInput, computerInput) {
@@ -184,7 +194,6 @@ const App = () => {
 		setRoundInputFormDisplay(true);
 	}
 
-
 	return (
 		<>
 			{/* Game start round selection form */}
@@ -214,8 +223,6 @@ const App = () => {
 				userWins={userWins}
 				computerWins={computerWins}
 			/>
-
-
 
 			{/* End Game Display */}
 			<EndGameResult
