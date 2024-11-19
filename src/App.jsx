@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EndGameResult from "./components/EndGameResult";
 import RoundInputForm from "./components/RoundInputForm";
+import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
 import UserInputButtons from "./components/UserInputButtons";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
@@ -201,16 +202,20 @@ const App = () => {
 				handleUserInput={handleUserInput}
 			/>
 
-			{/* Round Display */}
-			<div className="flex flex-col items-center">
-				{gameType === "rounds" && (
-					<p>Total Rounds:{isGameStarted && totalRounds}</p>
-				)}
-				<p>Current Round:{currentRound}</p>
-				<p>Ties:{ties}</p>
-				<p>Player Won:{userWins}</p>
-				<p>Computer Won:{computerWins}</p>
-			</div>
+			{/* Round and Scores Display */}
+			<RoundsAndScoresDisplay
+				gameType={gameType}
+				isGameStarted={isGameStarted}
+				totalRounds={totalRounds}
+				currentRound={currentRound}
+				ties={ties}
+				userWins={userWins}
+				computerWins={computerWins}
+			/>
+
+			{/* Rules and Exit Game buttons */}
+			<button>Rules</button>
+			<button>ExitGame</button>
 
 			{/* End Game Display */}
 			<EndGameResult
