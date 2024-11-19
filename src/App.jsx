@@ -170,6 +170,13 @@ const App = () => {
 		}
 	}
 
+	// Handles Game Exit button click
+	function exitGame() {
+		setGameStarted(false);
+		setInputDisabled(true);
+		setGameResult(true);
+	}
+
 	// Hides the result dialog, resets the states and starts the new game
 	function handleResultExit() {
 		setGameResult(false);
@@ -230,6 +237,10 @@ const App = () => {
 				resultMessage={resultMessage}
 				handleResultExit={handleResultExit}
 			/>
+
+			{/* Rules and Exit Game buttons */}
+			<button>Rules</button>
+			<button onClick={exitGame}>ExitGame</button>
 		</>
 	);
 };

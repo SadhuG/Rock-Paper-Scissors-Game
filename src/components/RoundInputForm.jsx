@@ -30,8 +30,9 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 		if (e.key === "Enter") handleFormSubmit(e, "rounds");
 	}
 
+	// Handles any change in the input and parseInt is added to convert strings accepted by form input into numbers (Stupid react problems)
 	function handleInputChange(e) {
-		setRoundsInput(e.target.value);
+		setRoundsInput(parseInt(e.target.value));
 	}
 
 	// Handles form submission and sends the rounds input and game type to App.jsx using setGame function
