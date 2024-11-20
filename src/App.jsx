@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EndGameResult from "./components/EndGameResult";
+import ExitGameButtonAndModal from "./components/ExitGameButtonAndModal";
 import RoundInputForm from "./components/RoundInputForm";
 import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
 import UserInputButtons from "./components/UserInputButtons";
@@ -240,7 +241,10 @@ const App = () => {
 
 			{/* Rules and Exit Game buttons */}
 			<button>Rules</button>
-			<button onClick={exitGame}>ExitGame</button>
+			<ExitGameButtonAndModal
+				gameType={gameType}
+				exitGame={exitGame}
+			/>
 		</>
 	);
 };
