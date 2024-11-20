@@ -3,6 +3,7 @@ import EndGameResult from "./components/EndGameResult";
 import ExitGameButtonAndModal from "./components/ExitGameButtonAndModal";
 import RoundInputForm from "./components/RoundInputForm";
 import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
+import RulesButtonAndModal from "./components/RulesButtonAndModal";
 import UserInputButtons from "./components/UserInputButtons";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
@@ -240,7 +241,7 @@ const App = () => {
 			/>
 
 			{/* Rules and Exit Game buttons */}
-			<button>Rules</button>
+			<RulesButtonAndModal />
 			<ExitGameButtonAndModal
 				gameType={gameType}
 				exitGame={exitGame}
