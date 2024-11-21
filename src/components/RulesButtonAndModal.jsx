@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useRef } from "react";
 
 const RulesButtonAndModal = () => {
@@ -28,10 +29,26 @@ const RulesButtonAndModal = () => {
 		<>
 			<button onClick={handleClick}>Rules</button>
 			<dialog ref={rulesModal}>
-				<p>Do you really want to exit game?</p>
+				<p>What is this? </p>
+				<p>
+					This is a rock paper scissors game. Built with React JS & Tailwind CSS
+					framework.
+				</p>
+				<p>How to play</p>
+				<p>Choose the game mode rounds or pass n play</p>
+				<p>Rounds: You enter the number of rounds and play the game</p>
+				<p>
+					Pass n play: Start playing without any specific number of rounds input
+					and play for as long as you want (upto 100 rounds)
+				</p>
+				<p>
+					You can start the game by selecting "rock", "scissors" or "paper".
+				</p>
+				<p>Rock beats scissors, scissors beats paper, paper beats rock</p>
 				<button onClick={handleExit}>Close</button>
 			</dialog>
 		</>
 	);
 };
+
 export default RulesButtonAndModal;

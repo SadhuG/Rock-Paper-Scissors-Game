@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import RulesButtonAndModal from "./RulesButtonAndModal";
 
 const RoundInputForm = ({ setGame, formDisplay }) => {
 	// Form round input states
@@ -93,8 +92,6 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 				>
 					Pass n Play
 				</button>
-
-				<RulesButtonAndModal />
 			</form>
 		</dialog>
 	);
