@@ -111,29 +111,41 @@ const App = () => {
 
 	// Runs and manages every single round
 	function playRound(playerChoice) {
-		// Runs every round
-		if (isGameStarted && currentRound <= totalRounds) {
-			setInputDisabled(true);
-			const getComputerChoice = generateComputerInput();
-			setComputerChoice(getComputerChoice);
-			const roundWinner = whoWon(playerChoice, getComputerChoice);
-			setRoundWonBy(roundWinner);
+		// Ensure the game is started and current round is within the total rounds limit
+		if (!isGameStarted || currentRound > totalRounds) return;
+
+		// Prepare for the round
+		showRoundResultDisplay(false);
+		setInputDisabled(true);
+
+		// Generate computer choice and determine the round winner
+		const getComputerChoice = generateComputerInput();
+		setComputerChoice(getComputerChoice);
+		const roundWinner = whoWon(playerChoice, getComputerChoice);
+		setRoundWonBy(roundWinner);
+
+		// Log the choices and the winner
+		console.log(
+			`User choice: ${playerChoice}, Computer choice: ${getComputerChoice}, 
+			Winner: ${roundWinner}`
+		);
+
+		// Start the animation and handle the post-animation logic
+		setAnimating(true);
+		setTimeout(() => {
+			setAnimating(false);
 			showRoundResultDisplay(true);
-			console.log(`user choice ${playerChoice}, computer choice ${getComputerChoice}
-			winner: ${roundWinner}`);
 			setInputDisabled(false);
 
-			// If it is not the last round it increments the current round by 1
+			// Check if there are more rounds left
 			if (currentRound < totalRounds) {
 				currentRoundIncrement();
-			}
-
-			// If it's the last round it handles the
-			if (currentRound == totalRounds) {
+			} else {
+				// If it's the last round, finalize the game
 				setInputDisabled(true);
 				setGameResult(true);
 			}
-		}
+		}, 2010);
 	}
 
 	//To ensure that the score states are updated before the game result is displayed

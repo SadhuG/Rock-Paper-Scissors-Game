@@ -6,15 +6,23 @@ const UserChoiceDisplay = ({
 	roundWonBy,
 	computerChoice,
 	isAnimating,
+	updateScores,
 }) => {
 	return (
 		<>
 			<ChoiceSlotDisplay
 				choice={userChoice}
 				isAnimating={isAnimating}
+				updateScores={updateScores}
 			/>
 			<p>Player Choice:{userChoice}</p>
 			<p>{roundResultDisplay ? roundWonBy : "v/s"}</p>
+
+			<ChoiceSlotDisplay
+				choice={computerChoice}
+				isAnimating={isAnimating}
+				updateScores={updateScores}
+			/>
 			<p>Computer Choice:{computerChoice}</p>
 		</>
 	);
@@ -25,5 +33,6 @@ UserChoiceDisplay.propTypes = {
 	roundWonBy: PropTypes.string,
 	computerChoice: PropTypes.string,
 	isAnimating: PropTypes.bool,
+	updateScores: PropTypes.func,
 };
 export default UserChoiceDisplay;
