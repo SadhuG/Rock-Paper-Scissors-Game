@@ -1,0 +1,46 @@
+.slot-machine {
+	text-align: center;
+}
+
+.slot {
+	margin: 0 10px;
+	width: 100px; /* Adjust width as needed */
+	height: 100px; /* Adjust height as needed */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	overflow: hidden;
+	position: relative;
+}
+
+.symbol {
+	width: 100%; /* Ensure images fit the slot */
+	height: 100%; /* Ensure images fit the slot */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.symbol img {
+	width: 100%;
+	height: auto;
+	animation: slide 0.3s ease-in-out;
+}
+
+.spinning img {
+	animation: slide 0.3s ease-in-out infinite;
+}
+
+@keyframes slide {
+	0% {
+		transform: translateY(100%);
+	}
+	50% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(-100%);
+	}
+}

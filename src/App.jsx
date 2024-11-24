@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+
 import EndGameResult from "./components/EndGameResult";
 import ExitGameButtonAndModal from "./components/ExitGameButtonAndModal";
 import RoundInputForm from "./components/RoundInputForm";
 import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
 import RulesButtonAndModal from "./components/RulesButtonAndModal";
+import UserChoiceDisplay from "./components/UserChoiceDisplay";
 import UserInputButtons from "./components/UserInputButtons";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
@@ -34,6 +36,9 @@ const App = () => {
 	// Round Results and display updated each round
 	const [roundWonBy, setRoundWonBy] = useState(null);
 	const [roundResultDisplay, showRoundResultDisplay] = useState(false);
+
+	// Triggers the slot animation
+	const [isAnimating, setAnimating] = useState(false);
 
 	// State to trigger game result display
 	const [displayGameResult, setGameResult] = useState(false);
@@ -212,9 +217,13 @@ const App = () => {
 			/>
 
 			{/* Choices display */}
-			<p>Player Choice:{userChoice}</p>
-			<p>{roundResultDisplay ? roundWonBy : "v/s"}</p>
-			<p>Computer Choice:{computerChoice}</p>
+			<UserChoiceDisplay
+				userChoice={userChoice}
+				roundResultDisplay={roundResultDisplay}
+				roundWonBy={roundWonBy}
+				computerChoice={computerChoice}
+				isAnimating={isAnimating}
+			/>
 
 			{/* Player Input/Choice Buttons */}
 			<UserInputButtons
