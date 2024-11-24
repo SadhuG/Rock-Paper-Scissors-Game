@@ -9,6 +9,7 @@ import UserChoiceDisplay from "./components/UserChoiceDisplay";
 import UserInputButtons from "./components/UserInputButtons";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
+
 const App = () => {
 	// Controls the display of round input form modal
 	const [displayRoundInputForm, setRoundInputFormDisplay] = useState(true);
@@ -27,6 +28,12 @@ const App = () => {
 	const [userWins, setUserWins] = useState(0);
 	const [computerWins, setComputerWins] = useState(0);
 	const [ties, setTies] = useState(0);
+
+	// Score display
+	const [scoreDisplay, updateScoreDisplay] = useState(false);
+	const [userWinsDisplay, updateUserWinsDisplay] = useState(0);
+	const [computerWinsDisplay, updateComputerWinsDisplay] = useState(0);
+	const [tiesDisplay, updateTiesDisplay] = useState(0);
 
 	// Round Choice states
 	// Choices are drilled down as parameters to functions, the "user" and "computer" "choice" states are used to update displays
@@ -117,6 +124,7 @@ const App = () => {
 		// Prepare for the round
 		showRoundResultDisplay(false);
 		setInputDisabled(true);
+		updateScoreDisplay(false);
 
 		// Generate computer choice and determine the round winner
 		const getComputerChoice = generateComputerInput();
@@ -135,6 +143,7 @@ const App = () => {
 		setTimeout(() => {
 			setAnimating(false);
 			showRoundResultDisplay(true);
+			updateScoreDisplay(true);
 			setInputDisabled(false);
 
 			// Check if there are more rounds left
@@ -147,6 +156,12 @@ const App = () => {
 			}
 		}, 2010);
 	}
+	// To updates scores after each round
+	useEffect(() => {
+		if (scoreDisplay) {
+			updateScores();
+		}
+	});
 
 	//To ensure that the score states are updated before the game result is displayed
 	useEffect(() => {
@@ -155,7 +170,6 @@ const App = () => {
 		}
 
 		return;
-		// Exhaustive dependencies are disabled to circumvent linter warnings
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [displayGameResult]);
 
@@ -175,6 +189,12 @@ const App = () => {
 			setComputerWins((computerWins) => computerWins + 1);
 			return "computer won";
 		}
+	}
+
+	function updateScores() {
+		updateComputerWinsDisplay(computerWins);
+		updateUserWinsDisplay(userWins);
+		updateTiesDisplay(ties);
 	}
 
 	// Compares the scores to get the winner
@@ -249,9 +269,9 @@ const App = () => {
 				isGameStarted={isGameStarted}
 				totalRounds={totalRounds}
 				currentRound={currentRound}
-				ties={ties}
-				userWins={userWins}
-				computerWins={computerWins}
+				ties={tiesDisplay}
+				userWins={userWinsDisplay}
+				computerWins={computerWinsDisplay}
 			/>
 
 			{/* End Game Display */}
