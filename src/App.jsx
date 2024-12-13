@@ -37,8 +37,8 @@ const App = () => {
 
 	// Round Choice states
 	// Choices are drilled down as parameters to functions, the "user" and "computer" "choice" states are used to update displays
-	const [userChoice, setUserChoice] = useState(null);
-	const [computerChoice, setComputerChoice] = useState(null);
+	const [userChoice, setUserChoice] = useState("package");
+	const [computerChoice, setComputerChoice] = useState("package");
 
 	// Round Results and display updated each round
 	const [roundWonBy, setRoundWonBy] = useState(null);

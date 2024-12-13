@@ -15,7 +15,8 @@ const UserChoiceDisplay = ({
 				isAnimating={isAnimating}
 				updateScores={updateScores}
 			/>
-			<p>Player Choice:{userChoice}</p>
+			<p>Player Choice {userChoice == "package" ? "" : `: ${userChoice}`}</p>
+
 			<p>{roundResultDisplay ? roundWonBy : "v/s"}</p>
 
 			<ChoiceSlotDisplay
@@ -23,10 +24,14 @@ const UserChoiceDisplay = ({
 				isAnimating={isAnimating}
 				updateScores={updateScores}
 			/>
-			<p>Computer Choice:{computerChoice}</p>
+			<p>
+				Computer Choice{" "}
+				{computerChoice == "package" ? "" : `: ${computerChoice}`}
+			</p>
 		</>
 	);
 };
+
 UserChoiceDisplay.propTypes = {
 	roundResultDisplay: PropTypes.bool,
 	userChoice: PropTypes.string,
