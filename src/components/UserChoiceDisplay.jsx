@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
+
 import ChoiceSlotDisplay from "./ChoiceSlotDisplay";
+
 const UserChoiceDisplay = ({
 	userChoice,
 	roundResultDisplay,

@@ -5,6 +5,7 @@ import ExitGameButtonAndModal from "./components/ExitGameButtonAndModal";
 import RoundInputForm from "./components/RoundInputForm";
 import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
 import RulesButtonAndModal from "./components/RulesButtonAndModal";
+import TapToContinueOverlay from "./components/TapToContinueOverlay";
 import UserChoiceDisplay from "./components/UserChoiceDisplay";
 import UserInputButtons from "./components/UserInputButtons";
 
@@ -43,6 +44,10 @@ const App = () => {
 	// Round Results and display updated each round
 	const [roundWonBy, setRoundWonBy] = useState(null);
 	const [roundResultDisplay, showRoundResultDisplay] = useState(false);
+
+	// Round Pause and Display Reset
+	const [displayTapToContinueOverlay, setTapToContinueOverlay] =
+		useState(false);
 
 	// Triggers the slot animation
 	const [isAnimating, setAnimating] = useState(false);
@@ -146,14 +151,8 @@ const App = () => {
 			updateScoreDisplay(true);
 			setInputDisabled(false);
 
-			// Check if there are more rounds left
-			if (currentRound < totalRounds) {
-				currentRoundIncrement();
-			} else {
-				// If it's the last round, finalize the game
-				setInputDisabled(true);
-				setGameResult(true);
-			}
+			// Display Overlay
+			setTapToContinueOverlay(true);
 		}, 2010);
 	}
 	// To updates scores after each round
@@ -172,6 +171,29 @@ const App = () => {
 		return;
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [displayGameResult]);
+
+	// Processes the Tap To Continue Overlay click
+	function TapToContinue() {
+		// Closing the overlay
+		setTapToContinueOverlay(false);
+
+		// Shows the "v/s" again instead of round winner
+		showRoundResultDisplay(false);
+
+		// Resetting the user and computer choices and round winner
+		setComputerChoice("package");
+		setUserChoice("package");
+		setRoundWonBy(null);
+
+		// Check if there are more rounds left
+		if (currentRound < totalRounds) {
+			currentRoundIncrement();
+		} else {
+			// If it's the last round, finalize the game
+			setInputDisabled(true);
+			setGameResult(true);
+		}
+	}
 
 	// Takes the inputs decides the round winner return's the round winner and updates the score
 	function whoWon(playerInput, computerInput) {
@@ -242,12 +264,17 @@ const App = () => {
 
 	return (
 		<>
+			{/* Tap to continue overlay to display between rounds */}
+			<TapToContinueOverlay
+				display={displayTapToContinueOverlay}
+				ttcFunction={TapToContinue}
+			/>
+
 			{/* Game start round selection form */}
 			<RoundInputForm
 				setGame={setGame}
 				formDisplay={displayRoundInputForm}
 			/>
-
 			{/* Choices display */}
 			<UserChoiceDisplay
 				userChoice={userChoice}
@@ -256,13 +283,11 @@ const App = () => {
 				computerChoice={computerChoice}
 				isAnimating={isAnimating}
 			/>
-
 			{/* Player Input/Choice Buttons */}
 			<UserInputButtons
 				inputDisabled={inputDisabled}
 				handleUserInput={handleUserInput}
 			/>
-
 			{/* Round and Scores Display */}
 			<RoundsAndScoresDisplay
 				gameType={gameType}
@@ -273,14 +298,12 @@ const App = () => {
 				userWins={userWinsDisplay}
 				computerWins={computerWinsDisplay}
 			/>
-
 			{/* End Game Display */}
 			<EndGameResult
 				displayGameResult={displayGameResult}
 				resultMessage={resultMessage}
 				handleResultExit={handleResultExit}
 			/>
-
 			{/* Rules and Exit Game buttons */}
 			<RulesButtonAndModal />
 			<ExitGameButtonAndModal
