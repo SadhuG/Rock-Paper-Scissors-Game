@@ -149,7 +149,6 @@ const App = () => {
 			setAnimating(false);
 			showRoundResultDisplay(true);
 			updateScoreDisplay(true);
-			setInputDisabled(false);
 
 			// Display Overlay
 			setTapToContinueOverlay(true);
@@ -177,8 +176,9 @@ const App = () => {
 		// Closing the overlay
 		setTapToContinueOverlay(false);
 
-		// Shows the "v/s" again instead of round winner
+		// Shows the "v/s" again instead of round winner and enabling user inputs
 		showRoundResultDisplay(false);
+		setInputDisabled(false);
 
 		// Resetting the user and computer choices and round winner
 		setComputerChoice("package");
