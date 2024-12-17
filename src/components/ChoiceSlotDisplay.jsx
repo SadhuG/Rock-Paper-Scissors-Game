@@ -21,11 +21,20 @@ const slotChoices = {
 	scissors: Scissors,
 };
 
-const ChoiceSlotDisplay = ({ choice, isAnimating, updateScores }) => {
+const ChoiceSlotDisplay = ({
+	choice,
+	isAnimating,
+	updateScores,
+	wonBy,
+	player,
+}) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	//Gives an array of ['rock','paper',scissors'] for the slot to loop around
 	const tiles = Object.keys(slotTiles);
 	const slotDisplay = Object.keys(slotChoices);
+
+	// State for border color
+	const [borderClr, setBorderClr] = useState("border-zinc-400");
 
 	useEffect(() => {
 		let interval;
@@ -37,12 +46,49 @@ const ChoiceSlotDisplay = ({ choice, isAnimating, updateScores }) => {
 		if (!isAnimating && choice) {
 			setCurrentIndex(tiles.indexOf(choice));
 			updateScores;
+
+			// Update border colors after the animation is completed
+			if (player == "player") {
+				switch (wonBy) {
+					case "player won":
+						return setBorderClr("border-green-500");
+					case "computer won":
+						return setBorderClr("border-red-400");
+					case "It's a tie":
+						return setBorderClr("border-amber-500");
+					case null:
+						return setBorderClr("border-zinc-400");
+				}
+			}
+
+			if (player == "computer") {
+				switch (wonBy) {
+					case "computer won":
+						return setBorderClr("border-green-500");
+					case "player won":
+						return setBorderClr("border-red-400");
+					case "It's a tie":
+						return setBorderClr("border-amber-500");
+					case null:
+						return setBorderClr("border-zinc-400");
+				}
+			}
 		}
 		return () => clearInterval(interval);
-	}, [isAnimating, tiles, choice, updateScores, slotDisplay.length]);
+	}, [
+		isAnimating,
+		tiles,
+		choice,
+		updateScores,
+		slotDisplay.length,
+		player,
+		wonBy,
+	]);
 
 	return (
-		<div className="slot">
+		<div
+			className={`flex flex-col items-center justify-center w-30 h-30 border-8 ${borderClr} rounded-3xl overflow-hidden`}
+		>
 			<div className={`symbol ${isAnimating ? "spinning" : ""}`}>
 				<img
 					src={slotTiles[tiles[currentIndex]]}
@@ -57,6 +103,8 @@ ChoiceSlotDisplay.propTypes = {
 	choice: PropTypes.string,
 	isAnimating: PropTypes.bool,
 	updateScores: PropTypes.func,
+	wonBy: PropTypes.string,
+	player: PropTypes.string,
 };
 
 export default ChoiceSlotDisplay;

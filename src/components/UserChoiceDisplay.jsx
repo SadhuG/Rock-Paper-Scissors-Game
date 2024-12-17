@@ -11,26 +11,33 @@ const UserChoiceDisplay = ({
 	updateScores,
 }) => {
 	return (
-		<>
-			<ChoiceSlotDisplay
-				choice={userChoice}
-				isAnimating={isAnimating}
-				updateScores={updateScores}
-			/>
-			<p>Player Choice {userChoice == "package" ? "" : `: ${userChoice}`}</p>
+		<section className="flex flex-col items-center gap-4">
+			<div className="flex flex-col items-center w-28 h-28">
+				<ChoiceSlotDisplay
+					choice={userChoice}
+					isAnimating={isAnimating}
+					updateScores={updateScores}
+					wonBy={roundWonBy}
+					player={"player"}
+				/>
+			</div>
 
-			<p>{roundResultDisplay ? roundWonBy : "v/s"}</p>
+			<div className="flex flex-col items-center justify-center w-20 h-20">
+				<p className="text-5xl font-bold text-white">
+					{roundResultDisplay ? roundWonBy : "v/s"}
+				</p>
+			</div>
 
-			<ChoiceSlotDisplay
-				choice={computerChoice}
-				isAnimating={isAnimating}
-				updateScores={updateScores}
-			/>
-			<p>
-				Computer Choice{" "}
-				{computerChoice == "package" ? "" : `: ${computerChoice}`}
-			</p>
-		</>
+			<div className="flex flex-col items-center w-28 h-28">
+				<ChoiceSlotDisplay
+					choice={computerChoice}
+					isAnimating={isAnimating}
+					updateScores={updateScores}
+					wonBy={roundWonBy}
+					player={"computer"}
+				/>
+			</div>
+		</section>
 	);
 };
 

@@ -275,6 +275,7 @@ const App = () => {
 				setGame={setGame}
 				formDisplay={displayRoundInputForm}
 			/>
+
 			{/* Choices display */}
 			<UserChoiceDisplay
 				userChoice={userChoice}
@@ -283,11 +284,13 @@ const App = () => {
 				computerChoice={computerChoice}
 				isAnimating={isAnimating}
 			/>
+
 			{/* Player Input/Choice Buttons */}
 			<UserInputButtons
 				inputDisabled={inputDisabled}
 				handleUserInput={handleUserInput}
 			/>
+
 			{/* Round and Scores Display */}
 			<RoundsAndScoresDisplay
 				gameType={gameType}
@@ -298,12 +301,14 @@ const App = () => {
 				userWins={userWinsDisplay}
 				computerWins={computerWinsDisplay}
 			/>
+
 			{/* End Game Display */}
 			<EndGameResult
 				displayGameResult={displayGameResult}
 				resultMessage={resultMessage}
 				handleResultExit={handleResultExit}
 			/>
+
 			{/* Rules and Exit Game buttons */}
 			<RulesButtonAndModal />
 			<ExitGameButtonAndModal
