@@ -12,7 +12,7 @@ const UserChoiceDisplay = ({
 }) => {
 	return (
 		<section className="flex flex-col items-center gap-4">
-			<div className="flex flex-col items-center w-28 h-28">
+			<div className="flex flex-col items-center">
 				<ChoiceSlotDisplay
 					choice={userChoice}
 					isAnimating={isAnimating}
@@ -20,6 +20,7 @@ const UserChoiceDisplay = ({
 					wonBy={roundWonBy}
 					player={"player"}
 				/>
+				<p>Player</p>
 			</div>
 
 			<div className="flex flex-col items-center justify-center w-20 h-20">
@@ -28,7 +29,7 @@ const UserChoiceDisplay = ({
 				</p>
 			</div>
 
-			<div className="flex flex-col items-center w-28 h-28">
+			<div className="flex flex-col items-center">
 				<ChoiceSlotDisplay
 					choice={computerChoice}
 					isAnimating={isAnimating}
@@ -36,6 +37,7 @@ const UserChoiceDisplay = ({
 					wonBy={roundWonBy}
 					player={"computer"}
 				/>
+				<p>Computer</p>
 			</div>
 		</section>
 	);

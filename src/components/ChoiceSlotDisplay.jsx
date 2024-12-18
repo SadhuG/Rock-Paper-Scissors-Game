@@ -87,7 +87,7 @@ const ChoiceSlotDisplay = ({
 
 	return (
 		<div
-			className={`flex flex-col items-center justify-center w-30 h-30 border-8 ${borderClr} rounded-3xl overflow-hidden`}
+			className={`flex flex-col items-center justify-center w-28 h-28 border-8 ${borderClr} rounded-3xl overflow-hidden`}
 		>
 			<div className={`symbol ${isAnimating ? "spinning" : ""}`}>
 				<img
