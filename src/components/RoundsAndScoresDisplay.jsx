@@ -9,19 +9,38 @@ const RoundsAndScoresDisplay = ({
 	computerWins,
 }) => {
 	return (
-		<div className="flex flex-col items-center">
+		<div className="flex flex-col items-center gap-2">
+			<div>
+				{isGameStarted && (
+					<p>
+						Game Type:
+						<span className="text-white">
+							{gameType === "rounds" ? " Rounds" : " Pass n Play"}
+						</span>
+					</p>
+				)}
+			</div>
+
+			{gameType === "rounds" && (
+				<p>
+					Total Rounds:
+					<span className="text-white">{isGameStarted && totalRounds}</span>
+				</p>
+			)}
+
 			<p>
-				{isGameStarted &&
-					`Game Type: ${gameType === "rounds" ? "Rounds" : "Pass n Play"}`}
+				Current Round:
+				<span className="text-white"> {currentRound}</span>
 			</p>
 			<p>
-				{gameType === "rounds" &&
-					`Total Rounds:${isGameStarted && totalRounds}`}
+				Ties:<span className="text-white"> {ties}</span>
 			</p>
-			<p>Current Round:{currentRound}</p>
-			<p>Ties:{ties}</p>
-			<p>Player Won:{userWins}</p>
-			<p>Computer Won:{computerWins}</p>
+			<p>
+				Player Won:<span className="text-white"> {userWins}</span>
+			</p>
+			<p>
+				Computer Won:<span className="text-white"> {computerWins}</span>
+			</p>
 		</div>
 	);
 };
@@ -35,4 +54,5 @@ RoundsAndScoresDisplay.propTypes = {
 	userWins: PropTypes.number,
 	computerWins: PropTypes.number,
 };
+
 export default RoundsAndScoresDisplay;
