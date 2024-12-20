@@ -286,10 +286,12 @@ const App = () => {
 			/>
 
 			{/* Player Input/Choice Buttons */}
-			<UserInputButtons
-				inputDisabled={inputDisabled}
-				handleUserInput={handleUserInput}
-			/>
+			<div className="flex justify-center">
+				<UserInputButtons
+					inputDisabled={inputDisabled}
+					handleUserInput={handleUserInput}
+				/>
+			</div>
 
 			{/* Round and Scores Display */}
 			<RoundsAndScoresDisplay
@@ -310,11 +312,13 @@ const App = () => {
 			/>
 
 			{/* Rules and Exit Game buttons */}
-			<RulesButtonAndModal />
-			<ExitGameButtonAndModal
-				gameType={gameType}
-				exitGame={exitGame}
-			/>
+			<div className="flex justify-between">
+				<RulesButtonAndModal />
+				<ExitGameButtonAndModal
+					gameType={gameType}
+					exitGame={exitGame}
+				/>
+			</div>
 		</>
 	);
 };

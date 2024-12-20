@@ -12,7 +12,7 @@ const UserInputButtons = ({ inputDisabled, handleUserInput }) => {
 				onClick={() => handleUserInput("rock")}
 				className={`w-20 h-20 border-8 ${
 					inputDisabled && `border-teal-800 bg-teal-800/25`
-				} border-teal-400 bg-teal-400/25 rounded-full p-2`}
+				}	focus:outline-none focus:ring-4 bg-teal-400/25 hover:bg-teal-700 focus:ring-teal-900 border-teal-400 rounded-full p-2`}
 			>
 				<img
 					src={Rock}
@@ -26,7 +26,7 @@ const UserInputButtons = ({ inputDisabled, handleUserInput }) => {
 				onClick={() => handleUserInput("paper")}
 				className={`w-20 h-20 border-8 ${
 					inputDisabled && `border-sky-800 bg-sky-800/25`
-				} border-sky-400 bg-sky-400/25 rounded-full p-2 `}
+				} focus:outline-none focus:ring-4 hover:bg-sky-700 focus:ring-sky-900 border-sky-400 bg-sky-400/25 rounded-full p-2 `}
 			>
 				<img
 					src={Paper}
@@ -40,7 +40,7 @@ const UserInputButtons = ({ inputDisabled, handleUserInput }) => {
 				onClick={() => handleUserInput("scissors")}
 				className={`w-20 h-20 border-8 ${
 					inputDisabled && `border-indigo-800 bg-indigo-800/25`
-				} border-indigo-400 bg-indigo-400/25 rounded-full p-2 `}
+				}focus:outline-none focus:ring-4 hover:bg-indigo-700 focus:ring-indigo-900 border-indigo-400 bg-indigo-400/25 rounded-full p-2 `}
 			>
 				<img
 					src={Scissors}
