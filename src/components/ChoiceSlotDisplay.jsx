@@ -50,11 +50,11 @@ const ChoiceSlotDisplay = ({
 			// Update border colors after the animation is completed
 			if (player == "player") {
 				switch (wonBy) {
-					case "player won":
+					case "Player Wins!":
 						return setBorderClr("border-green-500");
-					case "computer won":
+					case "Computer Wins!":
 						return setBorderClr("border-red-400");
-					case "It's a tie":
+					case "It's a Tie!":
 						return setBorderClr("border-amber-500");
 					case null:
 						return setBorderClr("border-zinc-400");
@@ -63,11 +63,11 @@ const ChoiceSlotDisplay = ({
 
 			if (player == "computer") {
 				switch (wonBy) {
-					case "computer won":
+					case "Computer Wins!":
 						return setBorderClr("border-green-500");
-					case "player won":
+					case "Player Wins!":
 						return setBorderClr("border-red-400");
-					case "It's a tie":
+					case "It's a Tie!":
 						return setBorderClr("border-amber-500");
 					case null:
 						return setBorderClr("border-zinc-400");
@@ -87,7 +87,7 @@ const ChoiceSlotDisplay = ({
 
 	return (
 		<div
-			className={`flex flex-col items-center justify-center w-28 h-28 border-8 ${borderClr} rounded-3xl overflow-hidden`}
+			className={`flex flex-col items-center justify-center w-28 h-28 md:w-40 md:h-40 lg:w-60 lg:h-60 border-8 lg:border-[10px] ${borderClr} rounded-3xl overflow-hidden`}
 		>
 			<div className={`symbol ${isAnimating ? "spinning" : ""}`}>
 				<img

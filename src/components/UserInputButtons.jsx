@@ -10,9 +10,9 @@ const UserInputButtons = ({ inputDisabled, handleUserInput }) => {
 			<button
 				disabled={inputDisabled}
 				onClick={() => handleUserInput("rock")}
-				className={`w-20 h-20 border-8 ${
+				className={`w-20 h-20 lg:w-28 lg:h-28 border-8 lg:border-[10px] ${
 					inputDisabled && `border-teal-800 bg-teal-800/25`
-				}	focus:outline-none focus:ring-4 bg-teal-400/25 hover:bg-teal-700 focus:ring-teal-900 border-teal-400 rounded-full p-2`}
+				}	focus:outline-none focus:ring-4 bg-teal-400/25 hover:bg-teal-700 focus:ring-teal-900 border-teal-400 rounded-full p-2 lg:p-3`}
 			>
 				<img
 					src={Rock}
@@ -24,9 +24,9 @@ const UserInputButtons = ({ inputDisabled, handleUserInput }) => {
 			<button
 				disabled={inputDisabled}
 				onClick={() => handleUserInput("paper")}
-				className={`w-20 h-20 border-8 ${
+				className={`w-20 h-20 lg:w-28 lg:h-28 border-8 lg:border-[10px] ${
 					inputDisabled && `border-sky-800 bg-sky-800/25`
-				} focus:outline-none focus:ring-4 hover:bg-sky-700 focus:ring-sky-900 border-sky-400 bg-sky-400/25 rounded-full p-2 `}
+				} focus:outline-none focus:ring-4 hover:bg-sky-700 focus:ring-sky-900 border-sky-400 bg-sky-400/25 rounded-full p-2 lg:p-3`}
 			>
 				<img
 					src={Paper}
@@ -38,9 +38,9 @@ const UserInputButtons = ({ inputDisabled, handleUserInput }) => {
 			<button
 				disabled={inputDisabled}
 				onClick={() => handleUserInput("scissors")}
-				className={`w-20 h-20 border-8 ${
+				className={`w-20 h-20 lg:w-28 lg:h-28 border-8 lg:border-[10px] ${
 					inputDisabled && `border-indigo-800 bg-indigo-800/25`
-				}focus:outline-none focus:ring-4 hover:bg-indigo-700 focus:ring-indigo-900 border-indigo-400 bg-indigo-400/25 rounded-full p-2 `}
+				}focus:outline-none focus:ring-4 hover:bg-indigo-700 focus:ring-indigo-900 border-indigo-400 bg-indigo-400/25 rounded-full p-2 lg:p-3`}
 			>
 				<img
 					src={Scissors}

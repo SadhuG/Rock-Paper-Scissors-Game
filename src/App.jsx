@@ -199,17 +199,17 @@ const App = () => {
 	function whoWon(playerInput, computerInput) {
 		if (playerInput === computerInput) {
 			setTies((ties) => ties + 1);
-			return "It's a tie";
+			return "It's a Tie!";
 		} else if (
 			(playerInput === "rock" && computerInput === "scissors") ||
 			(playerInput === "paper" && computerInput === "rock") ||
 			(playerInput === "scissors" && computerInput === "paper")
 		) {
 			setUserWins((playerWins) => playerWins + 1);
-			return "player won";
+			return "Player Wins!";
 		} else {
 			setComputerWins((computerWins) => computerWins + 1);
-			return "computer won";
+			return "Computer Wins!";
 		}
 	}
 
@@ -263,7 +263,7 @@ const App = () => {
 	}
 
 	return (
-		<>
+		<section className="relative flex flex-col items-center justify-center min-h-screen">
 			{/* Tap to continue overlay to display between rounds */}
 			<TapToContinueOverlay
 				display={displayTapToContinueOverlay}
@@ -276,34 +276,6 @@ const App = () => {
 				formDisplay={displayRoundInputForm}
 			/>
 
-			{/* Choices display */}
-			<UserChoiceDisplay
-				userChoice={userChoice}
-				roundResultDisplay={roundResultDisplay}
-				roundWonBy={roundWonBy}
-				computerChoice={computerChoice}
-				isAnimating={isAnimating}
-			/>
-
-			{/* Player Input/Choice Buttons */}
-			<div className="flex justify-center">
-				<UserInputButtons
-					inputDisabled={inputDisabled}
-					handleUserInput={handleUserInput}
-				/>
-			</div>
-
-			{/* Round and Scores Display */}
-			<RoundsAndScoresDisplay
-				gameType={gameType}
-				isGameStarted={isGameStarted}
-				totalRounds={totalRounds}
-				currentRound={currentRound}
-				ties={tiesDisplay}
-				userWins={userWinsDisplay}
-				computerWins={computerWinsDisplay}
-			/>
-
 			{/* End Game Display */}
 			<EndGameResult
 				displayGameResult={displayGameResult}
@@ -311,15 +283,48 @@ const App = () => {
 				handleResultExit={handleResultExit}
 			/>
 
-			{/* Rules and Exit Game buttons */}
-			<div className="flex justify-between">
-				<RulesButtonAndModal />
-				<ExitGameButtonAndModal
+			{/* Main Game Section */}
+			<section className="flex flex-col gap-4 p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 max-w-7xl mx-auto">
+				{/* Choices display */}
+				<div>
+					<UserChoiceDisplay
+						userChoice={userChoice}
+						roundResultDisplay={roundResultDisplay}
+						roundWonBy={roundWonBy}
+						computerChoice={computerChoice}
+						isAnimating={isAnimating}
+					/>
+				</div>
+
+				{/* Player Input/Choice Buttons */}
+				<div className="flex justify-center">
+					<UserInputButtons
+						inputDisabled={inputDisabled}
+						handleUserInput={handleUserInput}
+					/>
+				</div>
+
+				{/* Round and Scores Display */}
+				<RoundsAndScoresDisplay
 					gameType={gameType}
-					exitGame={exitGame}
+					isGameStarted={isGameStarted}
+					totalRounds={totalRounds}
+					currentRound={currentRound}
+					ties={tiesDisplay}
+					userWins={userWinsDisplay}
+					computerWins={computerWinsDisplay}
 				/>
-			</div>
-		</>
+
+				{/* Rules and Exit Game buttons */}
+				<div className="flex justify-between">
+					<RulesButtonAndModal />
+					<ExitGameButtonAndModal
+						gameType={gameType}
+						exitGame={exitGame}
+					/>
+				</div>
+			</section>
+		</section>
 	);
 };
 

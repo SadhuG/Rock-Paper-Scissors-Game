@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 
 import { useEffect, useRef, useState } from "react";
 
-import "./TTC.css";
-
 const TapToContinueOverlay = ({ display, ttcFunction }) => {
 	const overlay = useRef(null);
 	const [displayOverlay, setOverlay] = useState(false);
@@ -21,7 +19,7 @@ const TapToContinueOverlay = ({ display, ttcFunction }) => {
 			{displayOverlay && (
 				<div
 					ref={overlay}
-					className="overlay"
+					className=" absolute top-0 left-0 w-full h-full z-50 flex justify-center items-center"
 					onClick={ttcFunction}
 				></div>
 			)}

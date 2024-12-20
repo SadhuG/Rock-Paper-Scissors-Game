@@ -39,7 +39,7 @@ const ExitGameButtonAndModal = ({ gameType, exitGame }) => {
 		<>
 			{displayExitButton && (
 				<button
-					className="focus:outline-none text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300  rounded-lg text-xl font-medium px-5 py-2.5 me-2 mb-2 dark:bg-rose-500 dark:hover:bg-rose-700 dark:focus:ring-rose-900"
+					className="focus:outline-none text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300  rounded-lg text-xl lg:text-2xl font-medium px-5 py-2.5 dark:bg-rose-500 dark:hover:bg-rose-700 dark:focus:ring-rose-900"
 					onClick={handleClick}
 				>
 					{gameType === "rounds" ? "Exit Game" : "End Game"}
