@@ -61,38 +61,54 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 	}
 
 	return (
-		<dialog ref={inputForm}>
-			<p>Hello There</p>
-			<p>Enter the number of rounds you want to play or just Pass & Play</p>
+		<dialog
+			ref={inputForm}
+			className="w-full max-w-full h-full max-h-full bg-black/30 fixed top-0 left-0 m-0"
+		>
+			{/* Container */}
+			<div className="relative w-full h-full flex items-center justify-center p-20">
+				{/* Actual form styling */}
+				<div className="flex flex-col gap-6 items-center bg-slate-900 text-2xl lg:text-3xl text-white/90 px-10 py-20 border border-zinc-400 rounded-2xl">
+					<p className="text-6xl">Hello There!</p>
+					<p className="text-center">
+						Enter the number of rounds you want to play or just Pass & Play
+					</p>
 
-			<form>
-				<label>
-					<span>Enter the number of rounds</span>
-					<input
-						type="number"
-						placeholder="eg. 3"
-						value={roundsInput}
-						onChange={handleInputChange}
-						onKeyDown={handleInputKeyDown}
-					/>
-				</label>
+					<form className="flex flex-col gap-4 mt-4">
+						<label className="flex flex-col gap-1">
+							<span className="hidden">Enter the number of rounds</span>
+							<input
+								className="p-2 border border-zinc-400 rounded-lg shadow-lg bg-slate-800 text-white text-center
+								[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+								type="number"
+								placeholder="eg. 3"
+								value={roundsInput}
+								onChange={handleInputChange}
+								onKeyDown={handleInputKeyDown}
+							/>
+						</label>
 
-				{/* Button for fixed rounds */}
-				<button
-					type="button"
-					onClick={(e) => handleFormSubmit(e, "rounds")}
-				>
-					StartGame
-				</button>
-
-				{/* btn for pass and play */}
-				<button
-					type="button"
-					onClick={(e) => handleFormSubmit(e, "pnp")}
-				>
-					Pass n Play
-				</button>
-			</form>
+						<div className="flex gap-4 items-center justify-center">
+							{/* Button for fixed rounds */}
+							<button
+								type="button"
+								onClick={(e) => handleFormSubmit(e, "rounds")}
+								className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg text-lg lg:text-2xl font-medium px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+							>
+								Start Game
+							</button>
+							{/* Button for pass and play */}
+							<button
+								type="button"
+								onClick={(e) => handleFormSubmit(e, "pnp")}
+								className="px-5 py-2.5 border-2 border-white/50 rounded-lg text-lg lg:text-2xl font-medium  bg-gray-800 text-white hover:bg-gray-600 transition-colors"
+							>
+								Pass n Play
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</dialog>
 	);
 };
