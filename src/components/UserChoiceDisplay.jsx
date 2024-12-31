@@ -10,6 +10,7 @@ const UserChoiceDisplay = ({
 	computerChoice,
 	isAnimating,
 	updateScores,
+	resultArray,
 }) => {
 	return (
 		<section className="flex flex-col md:flex-row md:justify-center md:items-start items-center gap-4 md:gap-6">
@@ -26,7 +27,10 @@ const UserChoiceDisplay = ({
 
 			<div className="flex flex-col items-center justify-center h-28 md:w-40 md:h-40 lg:w-60 lg:h-60">
 				{roundResultDisplay ? (
-					<RoundResultCards roundWonBy={roundWonBy} />
+					<RoundResultCards
+						roundWonBy={roundWonBy}
+						resultArray={resultArray}
+					/>
 				) : (
 					<p className="text-5xl lg:text-8xl font-bold text-white">v/s</p>
 				)}
@@ -53,5 +57,6 @@ UserChoiceDisplay.propTypes = {
 	computerChoice: PropTypes.string,
 	isAnimating: PropTypes.bool,
 	updateScores: PropTypes.func,
+	resultArray: PropTypes.array,
 };
 export default UserChoiceDisplay;

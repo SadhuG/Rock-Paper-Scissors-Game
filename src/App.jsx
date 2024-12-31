@@ -11,6 +11,43 @@ import UserInputButtons from "./components/UserInputButtons";
 
 const choices = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
 
+// Loading the round result animations on the application start
+const resultArray = [
+	{
+		text: "Player Wins!",
+		image: (
+			<img
+				src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Person%20in%20Tuxedo.png"
+				alt="Person in Tuxedo"
+				className="h-[70%]"
+			/>
+		),
+		backgroundGradient: "bg-gradient-to-b from-green-300",
+	},
+	{
+		text: "Computer Wins!",
+		image: (
+			<img
+				src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Robot.png"
+				alt="Robot"
+				className="h-[70%]"
+			/>
+		),
+		backgroundGradient: "bg-gradient-to-b from-red-300",
+	},
+	{
+		text: "It's a Tie!",
+		image: (
+			<img
+				src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png"
+				alt="Handshake"
+				className="h-[70%]"
+			/>
+		),
+		backgroundGradient: "bg-gradient-to-b from-amber-300",
+	},
+];
+
 const App = () => {
 	// Controls the display of round input form modal
 	const [displayRoundInputForm, setRoundInputFormDisplay] = useState(true);
@@ -293,6 +330,7 @@ const App = () => {
 						roundWonBy={roundWonBy}
 						computerChoice={computerChoice}
 						isAnimating={isAnimating}
+						resultArray={resultArray}
 					/>
 				</div>
 
