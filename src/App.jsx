@@ -300,28 +300,28 @@ const App = () => {
 	}
 
 	return (
-		<section className="relative flex flex-col items-center justify-center min-h-screen">
+		<section className="relative flex flex-col items-center justify-center min-h-screen max-w-screen">
 			{/* Tap to continue overlay to display between rounds */}
 			<TapToContinueOverlay
 				display={displayTapToContinueOverlay}
 				ttcFunction={TapToContinue}
 			/>
 
-			{/* Game start round selection form */}
-			<RoundInputForm
-				setGame={setGame}
-				formDisplay={displayRoundInputForm}
-			/>
-
-			{/* End Game Display */}
-			<EndGameResult
-				displayGameResult={displayGameResult}
-				resultMessage={resultMessage}
-				handleResultExit={handleResultExit}
-			/>
-
 			{/* Main Game Section */}
-			<section className="flex flex-col gap-4 p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 max-w-7xl mx-auto">
+			<section className="flex flex-col gap-4 p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 w-screen max-w-7xl mx-auto">
+				{/* Game start round selection form */}
+				<RoundInputForm
+					setGame={setGame}
+					formDisplay={displayRoundInputForm}
+				/>
+
+				{/* End Game Display */}
+				<EndGameResult
+					displayGameResult={displayGameResult}
+					resultMessage={resultMessage}
+					handleResultExit={handleResultExit}
+				/>
+
 				{/* Choices display */}
 				<div>
 					<UserChoiceDisplay
