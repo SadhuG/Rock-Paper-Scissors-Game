@@ -66,11 +66,11 @@ const RoundInputForm = ({ setGame, formDisplay }) => {
 			className="w-full max-w-full h-full max-h-full p-4 md:p-8 lg:py-10 lg:px-32 bg-black/30 fixed top-0 left-0 m-0"
 		>
 			{/* Container */}
-			<div className="relative w-full h-full flex items-center justify-center">
+			<div className="w-full h-full flex items-center justify-center">
 				{/* Actual form styling */}
 				<div className="flex flex-col gap-6 items-center bg-slate-900 text-xl lg:text-3xl text-white/90 px-3 md:px-10 py-10 md:py-14 border border-zinc-400 rounded-2xl">
-					<p className="text-4xl">Hello There!</p>
-					<p className=" text-center">
+					<p className="text-4xl md:text-5xl lg:text-6xl">Hello There!</p>
+					<p className="text-center">
 						Enter the number of rounds you want to play or just Pass & Play
 					</p>
 

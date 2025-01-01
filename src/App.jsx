@@ -86,19 +86,19 @@ const App = () => {
 			title: "Yay you won",
 			image: resultImage.playerWins,
 			message: "Wanna continue this winning streak",
-			buttonText: "Play again",
+			buttonText: "Play Again",
 		},
 		computerWon: {
 			title: "You Lost",
 			image: resultImage.computerWins,
 			message: "Don't loose hope we're rooting for you",
-			buttonText: "start again",
+			buttonText: "Start Again",
 		},
 		tie: {
 			title: "It's a Tie",
 			image: resultImage.tie,
 			message: "We wish you all the best",
-			buttonText: "try again",
+			buttonText: "Try Again",
 		},
 	};
 
@@ -291,68 +291,74 @@ const App = () => {
 	}
 
 	return (
-		<section className="relative flex flex-col items-center justify-center min-h-screen max-w-screen">
-			{/* Tap to continue overlay to display between rounds */}
-			<TapToContinueOverlay
-				display={displayTapToContinueOverlay}
-				ttcFunction={TapToContinue}
-			/>
-
-			{/* Main Game Section */}
-			<section className="flex flex-col gap-4 p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 w-screen max-w-7xl mx-auto">
-				{/* Game start round selection form */}
-				<RoundInputForm
-					setGame={setGame}
-					formDisplay={displayRoundInputForm}
+		<section className="flex flex-col items-center justify-center min-h-screen max-w-screen">
+			{/* Game container */}
+			<div className="relative flex flex-col items-center justify-center w-full h-full">
+				{/* Tap to continue overlay to display between rounds */}
+				<TapToContinueOverlay
+					display={displayTapToContinueOverlay}
+					ttcFunction={TapToContinue}
 				/>
 
-				{/* End Game Display */}
-				<EndGameResult
-					displayGameResult={displayGameResult}
-					resultMessage={resultMessage}
-					handleResultExit={handleResultExit}
-				/>
-
-				{/* Choices display */}
-				<div>
-					<UserChoiceDisplay
-						userChoice={userChoice}
-						roundResultDisplay={roundResultDisplay}
-						roundWonBy={roundWonBy}
-						computerChoice={computerChoice}
-						isAnimating={isAnimating}
-						resultImage={resultImage}
+				{/* Main Game Section */}
+				<section className="flex flex-col gap-4 p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 w-screen max-w-7xl mx-auto">
+					{/* Game start round selection form */}
+					<RoundInputForm
+						setGame={setGame}
+						formDisplay={displayRoundInputForm}
 					/>
-				</div>
 
-				{/* Player Input/Choice Buttons */}
-				<div className="flex justify-center">
-					<UserInputButtons
-						inputDisabled={inputDisabled}
-						handleUserInput={handleUserInput}
+					{/* End Game Display */}
+					<EndGameResult
+						displayGameResult={displayGameResult}
+						resultMessage={resultMessage}
+						handleResultExit={handleResultExit}
 					/>
-				</div>
 
-				{/* Round and Scores Display */}
-				<RoundsAndScoresDisplay
-					gameType={gameType}
-					isGameStarted={isGameStarted}
-					totalRounds={totalRounds}
-					currentRound={currentRound}
-					ties={tiesDisplay}
-					userWins={userWinsDisplay}
-					computerWins={computerWinsDisplay}
-				/>
+					{/* Choices display */}
+					<div>
+						<UserChoiceDisplay
+							userChoice={userChoice}
+							roundResultDisplay={roundResultDisplay}
+							roundWonBy={roundWonBy}
+							computerChoice={computerChoice}
+							isAnimating={isAnimating}
+							resultImage={resultImage}
+						/>
+					</div>
 
-				{/* Rules and Exit Game buttons */}
-				<div className="flex justify-between">
-					<RulesButtonAndModal />
-					<ExitGameButtonAndModal
+					{/* Player Input/Choice Buttons */}
+					<div className="flex justify-center">
+						<UserInputButtons
+							inputDisabled={inputDisabled}
+							handleUserInput={handleUserInput}
+						/>
+					</div>
+
+					{/* Round and Scores Display */}
+					<RoundsAndScoresDisplay
 						gameType={gameType}
-						exitGame={exitGame}
+						isGameStarted={isGameStarted}
+						totalRounds={totalRounds}
+						currentRound={currentRound}
+						ties={tiesDisplay}
+						userWins={userWinsDisplay}
+						computerWins={computerWinsDisplay}
 					/>
-				</div>
-			</section>
+				</section>
+			</div>
+
+			{/* Rules and Exit Game buttons */}
+			<div
+				className=" flex justify-between
+			p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 w-screen max-w-7xl mx-auto"
+			>
+				<RulesButtonAndModal />
+				<ExitGameButtonAndModal
+					gameType={gameType}
+					exitGame={exitGame}
+				/>
+			</div>
 		</section>
 	);
 };
