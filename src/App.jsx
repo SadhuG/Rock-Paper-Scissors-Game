@@ -5,6 +5,7 @@ import ExitGameButtonAndModal from "./components/ExitGameButtonAndModal";
 import RoundInputForm from "./components/RoundInputForm";
 import RoundsAndScoresDisplay from "./components/RoundsAndScoresDisplay";
 import RulesButtonAndModal from "./components/RulesButtonAndModal";
+import TapToContinueDisplay from "./components/TapToContinueDisplay";
 import TapToContinueOverlay from "./components/TapToContinueOverlay";
 import UserChoiceDisplay from "./components/UserChoiceDisplay";
 import UserInputButtons from "./components/UserInputButtons";
@@ -326,6 +327,8 @@ const App = () => {
 							resultImage={resultImage}
 						/>
 					</div>
+
+					<TapToContinueDisplay display={displayTapToContinueOverlay} />
 
 					{/* Player Input/Choice Buttons */}
 					<div className="flex justify-center">
