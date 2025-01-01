@@ -27,6 +27,7 @@ const EndGameResult = ({
 			{resultMessage && (
 				<>
 					<p>{resultMessage.title}</p>
+					{resultMessage.image && resultMessage.image}
 					<p>{resultMessage.message}</p>
 					<button onClick={handleClick}>{resultMessage.buttonText}</button>
 				</>

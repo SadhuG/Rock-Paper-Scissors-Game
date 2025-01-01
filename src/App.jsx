@@ -84,16 +84,19 @@ const App = () => {
 	const finalMessages = {
 		playerWon: {
 			title: "Yay you won",
+			image: resultImage.playerWins,
 			message: "Wanna continue this winning streak",
 			buttonText: "Play again",
 		},
 		computerWon: {
 			title: "You Lost",
+			image: resultImage.computerWins,
 			message: "Don't loose hope we're rooting for you",
 			buttonText: "start again",
 		},
 		tie: {
 			title: "It's a Tie",
+			image: resultImage.tie,
 			message: "We wish you all the best",
 			buttonText: "try again",
 		},
