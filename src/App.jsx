@@ -353,14 +353,18 @@ const App = () => {
 
 			{/* Rules and Exit Game buttons */}
 			<div
-				className=" flex justify-between
-			p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 w-screen max-w-7xl mx-auto"
+				className={`w-full ${displayTapToContinueOverlay ? "bg-black/10" : ""}`}
 			>
-				<RulesButtonAndModal />
-				<ExitGameButtonAndModal
-					gameType={gameType}
-					exitGame={exitGame}
-				/>
+				<div
+					className={`flex justify-between 
+			p-4 md:gap-6 md:p-8 lg:gap-10 lg:py-10 lg:px-32 max-w-7xl mx-auto`}
+				>
+					<RulesButtonAndModal />
+					<ExitGameButtonAndModal
+						gameType={gameType}
+						exitGame={exitGame}
+					/>
+				</div>
 			</div>
 		</section>
 	);
