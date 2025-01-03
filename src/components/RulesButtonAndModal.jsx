@@ -39,7 +39,7 @@ const RulesButtonAndModal = () => {
 				className="w-full max-w-full h-full max-h-full p-4 md:p-8 lg:py-10 lg:px-32 bg-black/30 fixed top-0 left-0 m-0"
 			>
 				<div className="w-full h-full max-w-full max-h-full flex items-start justify-center">
-					<div className="w-full h-full max-w-full max-h-full overflow-hidden flex flex-col gap-6 items-start  bg-slate-900 text-xl lg:text-2xl text-white/90  border border-zinc-400 rounded-2xl">
+					<div className="w-full h-full max-w-full max-h-full overflow-hidden flex flex-col gap-6 items-start justify-center  bg-slate-900 text-xl lg:text-2xl text-white/90  border border-zinc-400 rounded-2xl">
 						<div className="w-full h-full max-w-full max-h-full flex flex-col gap-6 items-start  overflow-y-auto px-3 md:px-10 py-10 md:py-14">
 							<div className="flex justify-between w-full">
 								<p className="font-medium text-3xl">Rules:</p>
